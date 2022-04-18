@@ -62,4 +62,5 @@
   - happi0
   - Quartzkun
   - jiyeme
+  - CurryWOE
 
