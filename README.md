@@ -63,4 +63,5 @@
   - Quartzkun
   - jiyeme
   - CurryWOE
+  - Sioncovy
 
