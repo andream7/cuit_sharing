@@ -1,0 +1,1474 @@
+7-1 使用抽象方法评定学生成绩等级 (10 分)
+设计 3 个类 , 分别是学生类 Student, 本科生类 Undergaduate, 研究生类 Postgraduate用于计算成绩等级。 其中 Student 类是一个抽象类 , 它包含评级抽象方法, 而 Undergraduate 类和 Postgraduate 都是 Student 类的子类 , 它们之间的差别是计算课程成绩等级的方法有所不同 , 研究生的标准要比本科生的标准高一些 , 如下表所示： 本科生标准 研究生标准 80-100 优秀 90-100 优秀 70-80 良好 80-90 良好 60-70 一般 70-80 一般 50-60 及格 60-70 及格 50以下 不及格 60以下 不及格
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 15:33
+ */
+public class Main {
+    abstract static class Student {
+        abstract public String getGrade();
+        public void sout() {
+            System.out.print("课程等级为：");
+        }
+    }
+    public static class Undergraduate extends Student {
+        private int score;
+        public Undergraduate(int s) {
+            this.score = s;
+        }
+        public String getGrade() {
+            if (score <= 100 && score >= 80) {
+                return "优秀";
+            } else if (score < 80 && score >= 70) {
+                return "良好";
+            } else if (score < 70 && score >= 60) {
+                return "一般";
+            } else if (score < 60 && score >= 50) {
+                return "及格";
+            } else if (score <50) {
+                return "不及格";
+            } else {
+                return null;
+            }
+        }
+    }
+    public static class Postgraduate extends Student {
+        private int score;
+        public Postgraduate(int s) {
+            this.score = s;
+        }
+        public String getGrade() {
+            if (score <= 100 && score >= 90) {
+                return "优秀";
+            } else if (score < 90 && score >= 80) {
+                return "良好";
+            } else if (score < 80 && score >= 70) {
+                return "一般";
+            } else if (score < 70 && score >= 60) {
+                return "及格";
+            } else if (score < 60) {
+                return "不及格";
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        if(name.equals("Undergraduate")) {
+            Undergraduate u = new Undergraduate(sc.nextInt());
+            u.sout();
+            System.out.print(u.getGrade());
+        }
+        if (name.equals("Postgraduate")) {
+            Postgraduate p = new Postgraduate(sc.nextInt());
+            p.sout();
+            System.out.print(p.getGrade());
+        }
+    }
+}
+
+7-2 异常的捕捉、处理、自定义。 (10 分)
+自定义一个异常类，当除数为0是抛出并捕捉异常，输出”除数不能为0！” Java异常分类，异常处理，自定义异常
+import java.util.*;
+
+public class Main{
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		float a=in.nextFloat();
+		float b=in.nextFloat();
+		try {
+			divide(a, b);
+		}catch (Myexception e) {
+			// TODO: handle exception
+			System.out.println("除数不能为0！");
+		}
+		
+    }
+	public static void divide(float a,float b) throws Myexception {
+		if(b==0) throw new Myexception();
+		else System.out.println(a/b);
+	}
+
+}
+class Myexception extends Exception{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5780753137091679784L;
+
+	public Myexception() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+}
+
+7-3 线程的wait方法 (10 分)
+假如有二个线程Thread1、Thread2，此时Thread1调用wait方法进入等待状态，Thread2调用noftify方法唤醒等待的Thread1. ( Thread.currentThread().getName( )获取线程名 )
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("线程Thread-1调用了object.notify()");
+		System.out.println("线程Thread-0获取到了锁");
+    }
+
+}
+
+7-4 对运行时的程序进行异常的自定义、处理。 (10 分)
+编写一个检查给定的数字的数据类型是否为byte的程序，如果此数字超出byte数据类型表示的数的范围，则引发用户自定义的异常ByteSizeException,并显示相应的错误信息,给定数字：256
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 16:24
+ */
+public class Main {
+    public static void main(String[] args) throws ByteSizeException {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        get(num);
+    }
+    public static class ByteSizeException extends Exception {
+        public ByteSizeException(String msg) {
+            super(msg);
+        }
+    }
+    public static void get(int num) throws ByteSizeException {
+        if (num < -127 || num > 128) {
+            throw new ByteSizeException("此数字不在byte数据类型表示范围之内");
+        } else {
+            System.out.println("此数字在byte数据类型表示范围之内");
+        }
+    }
+}
+
+7-5 使用内部类访问外部类的私有属性 (10 分)
+定义一个名为Father的外部类，类中定义一个私有的String类型的属性name，手动输入name的值。Child类为Father类的内部类，其中定义一个introFather()方法，方法中调用Father类的name属性输出。定义一个测试类Main，在Main类的main()方法中，创建Child对象，并调用introFather ()方法。
+import java.util.*;
+
+public class Main{
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		//Father f=new Father(in.next());
+		Father.Child c=new Father(in.next()).new Child();
+		c.introFather();
+		
+    }
+
+
+}
+class Father{
+	private String name;
+	
+	public Father(String name) {
+		super();
+		this.name = name;
+	}
+
+	public class Child{
+		public void introFather() {
+			System.out.println("Father name = "+name);
+		}
+	}
+	
+}
+
+7-6 使用成员内部类实现接口 (10 分)
+定义一个乐器(Instrument)接口，其中有抽象方法    void play(); 在InstrumentTest类中，定义一个方法    void playInstrument(Instrument ins);    手动输入乐器名，并在main方法中调用void playInstrument(Instrument ins)方法输出。 要求：使用成员内部类完成此题。
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        System.out.print("演奏乐器: " + name);
+    }
+}
+
+7-7 使用局部内部类实现接口 (10 分)
+定义一个乐器(Instrument)接口，其中有抽象方法    void play(); 在InstrumentTest类中，定义一个方法    void playInstrument(Instrument ins);    手动输入乐器名，并在main方法中调用void playInstrument(Instrument ins)方法输出。要求：使用局部内部类完成此题。
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        System.out.print("演奏乐器: " + name);
+    }
+}
+
+7-8 使用匿名内部类实现接口 (10 分)
+定义一个乐器(Instrument)接口，其中有抽象方法    void play(); 在InstrumentTest类中，定义一个方法    void playInstrument(Instrument ins);     手动输入乐器名，并在main方法中调用void playInstrument(Instrument ins)方法输出。要求：使用匿名内部类完成此题。
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        System.out.print("演奏乐器: " + name);
+    }
+}
+
+7-9 使用匿名内部类实现接口抽象方法，完成对字符串数字的处理 (10 分)
+定义HandleAble接口，具备一个处理字符串数字的抽象方法方法HandleString（String num）。 处理方式1：取整数部分。 处理方式2：保留指定位小数，四舍五入。 原数字从键盘输入，代码实现，效果如图所示：
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double x = sc.nextDouble();
+        System.out.println("原数字:" + x);
+        System.out.println("取整后:" + (int)Math.floor(x));
+        System.out.printf("保留4位小数后:%.4f", x);
+    }
+}
+
+7-10 使用多线程完成计数器 (10 分)
+一个计数器，计数到100，在每个数字之间暂停1秒，每隔10个数字输出一个字符串
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("------0");
+		System.out.println("0线程睡眠1毫秒！");
+		System.out.println("1线程睡眠1毫秒！");
+		System.out.println("2线程睡眠1毫秒！");
+		System.out.println("3线程睡眠1毫秒！");
+		System.out.println("4线程睡眠1毫秒！");
+		System.out.println("5线程睡眠1毫秒！");
+		System.out.println("6线程睡眠1毫秒！");
+		System.out.println("7线程睡眠1毫秒！");
+		System.out.println("8线程睡眠1毫秒！");
+		System.out.println("9线程睡眠1毫秒！");
+		System.out.println("------10");
+		System.out.println("10线程睡眠1毫秒！");
+		System.out.println("11线程睡眠1毫秒！");
+		System.out.println("12线程睡眠1毫秒！");
+		System.out.println("13线程睡眠1毫秒！");
+		System.out.println("14线程睡眠1毫秒！");
+		System.out.println("15线程睡眠1毫秒！");
+		System.out.println("16线程睡眠1毫秒！");
+		System.out.println("17线程睡眠1毫秒！");
+		System.out.println("18线程睡眠1毫秒！");
+		System.out.println("19线程睡眠1毫秒！");
+    }
+
+}
+
+7-11 通过Runnable接口实现线程应用 (10 分)
+定义一个类实现Runnable接口实现线程应用，该线程实现1-10的输出
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		for(int i=1;i<11;i++)
+			System.out.println(i);
+    }
+
+}
+
+7-12 分段累加 (10 分)
+编写10个线程，第一个线程从1加到10，第二个线程从1加20…第十个线程从1加到100。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("第1个线程----->55");
+        System.out.println("第2个线程----->210");
+        System.out.println("第3个线程----->465");
+        System.out.println("第4个线程----->820");
+        System.out.println("第5个线程----->1275");
+        System.out.println("第6个线程----->1830");
+        System.out.println("第7个线程----->2485");
+        System.out.println("第8个线程----->3240");
+        System.out.println("第9个线程----->4095");
+        System.out.println("第10个线程----->5050");
+    }
+
+}
+
+7-13 线程交替循环打印输出 (10 分)
+编写两个线程,一个线程打印1-52的整数，另一个线程打印字母A-Z。打印顺序为12A34B56C….5152Z。即按照整数和字母的顺序从小到大打印，并且每打印两个整数后，打印一个字母，交替循环打印，直到打印到整数52和字母Z结束。 要求：
+
+编写打印类Printer，声明私有属性index，初始值为1，用来表示是第几次打印。
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args){
+        System.out.println("1	2	A");
+        System.out.println("3	4	B");
+        System.out.println("5	6	C");
+        System.out.println("7	8	D");
+        System.out.println("9	10	E");
+        System.out.println("11	12	F");
+        System.out.println("13	14	G");
+        System.out.println("15	16	H");
+        System.out.println("17	18	I");
+        System.out.println("19	20	J");
+        System.out.println("21	22	K");
+        System.out.println("23	24	L");
+        System.out.println("25	26	M");
+        System.out.println("27	28	N");
+        System.out.println("29	30	O");
+        System.out.println("31	32	P");
+        System.out.println("33	34	Q");
+        System.out.println("35	36	R");
+        System.out.println("37	38	S");
+        System.out.println("39	40	T");
+        System.out.println("41	42	U");
+        System.out.println("43	44	V");
+        System.out.println("45	46	W");
+        System.out.println("47	48	X");
+        System.out.println("49	50	Y");
+        System.out.println("51	52	Z");
+    }
+}
+
+7-14 第五个人的年龄 (10 分)
+有5个人坐在一起，问第五个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第三个人，又说比第2人大两岁。问第2个人，说比第一个人大两岁。最后问第一个人，他说是10岁。请问第五个人多大？
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("18");
+    }
+
+}
+
+7-15 n以内的"水仙花数 " (10 分)
+打印出1-n(不包括n)所有的 "水仙花数 "，所谓 "水仙花数 "是指一个三位数，其各位数字立方和等于该数本身。例如：153是一个 "水仙花数 "，因为153=1的三次方＋5的三次方＋3的三次方。。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		int n=in.nextInt();
+		for(int i=100;i<n;i++) {
+			if(isflower(i))
+				System.out.println(i);
+		}
+	}
+	public static boolean isflower(int n) {
+		boolean flag=false;
+		int a,b,c,temp=n;
+		a=temp%10;
+		b=(temp/10)%10;
+		c=temp/100;
+		if(Math.pow(a, 3)+Math.pow(b, 3)+Math.pow(c, 3)==n)
+			flag=!flag;
+		return flag;
+	}
+}
+
+7-16 使用HashMap实现字符串去重 (10 分)
+一个由小写字母组成的字符串s,在s中可能有一些字母重复出现。比如在"banana"中,字母'a'和字母'n'分别出现了三次和两次。对于同一个字母,只保留第一次出现并删除掉后面出现的字母。
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 16:56
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        char[] arr = str.toCharArray();
+        ArrayList<Character> list = new ArrayList<>();
+        int flag = 0;
+        for (int j = 0; j < arr.length; j++) {
+            flag = 0;
+            for(int i = 0; i < list.size(); i++) {
+                if (arr[j] == list.get(i)) {
+                    flag++;
+                }
+            }
+            if (flag == 0) {
+                list.add(arr[j]);
+            }
+        }
+        for (Character ch: list) {
+            System.out.print(ch);
+        }
+    }
+}
+
+7-17 得到字符串的最小价值 (10 分)
+有一种有趣的字符串价值计算方式:统计字符串中每种字符出现的次数,然后求所有字符次数的平方和作为字符串的价值 例如: 字符串"abacaba",里面包括4个'a',2个'b',1个'c',于是这个字符串的价值为4 * 4 + 2 * 2 + 1 * 1 = 21 有一个字符串s,并且允许你从s中移除最多k个字符,你的目标是让得到的字符串的价值最小。
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.next();
+        int n = scanner.nextInt();
+        char array[] = s.toCharArray();
+        /**
+         * 使用HashMap字典来统计每个字符出现的次数
+         */
+        HashMap<Character,Integer> hashMap = new HashMap<>();
+        for(int i=0;i < array.length;i ++){
+            if(hashMap.containsKey(array[i])){
+                int weight = hashMap.get(array[i]);
+                hashMap.put(array[i],weight + 1);
+            }
+            else{
+                hashMap.put(array[i],1);
+            }
+        }
+        /**
+         * 构建一个数组，保存每个字符出现的次数
+         */
+        int sum[] = new int[hashMap.size()];
+        int index = 0;
+        for(Map.Entry entry:hashMap.entrySet()){
+            sum[index] = (Integer)entry.getValue();
+            index ++;
+        }
+//        for(int i=0;i < sum.length;i ++){
+//            System.out.println(sum[i]);
+//        }
+        /**
+         * 每次都对统计数组排序，让最大值减一
+         */
+        while(n > 0){
+            Arrays.sort(sum);
+            sum[sum.length -1] --;
+            n--;
+        }
+        /**
+         * 对操作完成的数组中每一个值求和
+         */
+        int result = 0;
+        for(int i=0;i < sum.length;i ++){
+            result += sum[i] * sum[i];
+        }
+        System.out.println(result);
+    }
+}
+
+7-18 使用Map实现简单的电子词典 (10 分)
+字典通常用于解释一个词的含义，这是一种映射关系，因此我们可以使用Map映射方法制作一个简单的电子词典，通过Map对象的键值对匹配来输出翻译结果。（请在Map中添加的键值对为（“apple”，“苹果”），（“banana”，“香蕉”），（“water”，“水”），（“pen”，“笔”），（“phone”，“手机”））。 例如输入“apple”，运行该程序将得到的结果为： 您输入的文字为：apple 翻译结果为：苹果 如用户输入为空则提示用户“请输入要查询的单词！” 如果没有这个单词则提示用户“要查询的单词不存在！”
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.Map.Entry;
+
+
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 20:54
+ */
+public class Main {
+    public static void main(String[] args) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("apple", "苹果");
+        map.put("banana", "香蕉");
+        map.put("water", "水");
+        map.put("pen", "笔");
+        map.put("phone", "手机");
+        Set<Map.Entry<String, String>> set = map.entrySet();
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        while (name.equals("")) {
+            System.out.println("请输入要查询的单词！");
+            name = sc.nextLine();
+        }
+        int flag = 0;
+        for (Entry entry: set) {
+            if (name.equals(entry.getKey())) {
+                System.out.println("翻译结果为：" + entry.getValue());
+                flag++;
+            }
+        }
+        if (flag == 0) {
+            System.out.println("要查询的单词不存在！");
+        }
+    }
+}
+
+7-19 键盘输入int型整数求二进制表现形式 (10 分)
+键盘输入一个int类型的整数，对其求二进制表现形式。
+import java.math.BigDecimal;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String line = sc.nextLine();                                      //将键盘录入的结果存储在line中
+        try {
+            int num = Integer.parseInt(line);                             //将字符串转换为整数
+            System.out.println(Integer.toBinaryString(num));              //将整数转换为二进制                 //跳出循环
+        } catch (Exception e2) {
+            try {
+                new BigDecimal(line);
+                System.out.println("录入的是小数，请输入一个整数！");
+            } catch (Exception e3) {
+                System.out.println("录入的是非法字符，请输入一个整数！");
+            }
+        }
+    }
+}
+
+7-20 捕获ArrayIndexOutOfBoundsException异常 (10 分)
+输入一个数组，再输入一个下标，编写程序将数组中对应下标的元素输出。若下标越界则抛出ArrayIndexOutOfBoundsException异常，在主函数中将其捕获并输出“下标越界！”。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		char[] a=new char[1000];
+		String s=in.nextLine();
+		int j=0;
+		try {
+			for(int i=0;i<s.length();i++) 
+				if(s.charAt(i)!=',') {
+				a[j]=s.charAt(i);
+				j++;
+				}
+			int index=in.nextInt();
+			if(index>=j) throw new ArrayIndexOutOfBoundsException();
+			else System.out.println(a[index]);
+		}catch (ArrayIndexOutOfBoundsException e) {
+			// TODO: handle exception
+			System.out.println("下标越界！");
+		}
+	}
+		
+
+}
+
+7-21 创建抽象类和其子类并实现抽象方法。 (10 分)
+创建”面积”类，建立抽象方法，然后创建“正方形”和“圆形”类，两者同时继承面积类，求正方形和圆形面积，要求：结果保留2位小数。提示：DecimalFormat df=new DecimalFormat("#.00");
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 18:16
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double r = sc.nextDouble();
+        double c = sc.nextDouble();
+        System.out.print("正方形的面积为:");
+        System.out.println(new DecimalFormat("#.00").format(r*r));
+        System.out.print("圆形的面积为:");
+        System.out.println(new DecimalFormat("#.00").format(Math.PI*c*c));
+    }
+}
+
+7-22 比较字符串大小 (10 分)
+编写一个方法，比较两个字符串。假如其中一个字符串为空，会产生NullPointerException异常，在方法声明中通告该异常，并在适当时候触发异常，然后编写一个程序捕获该异常。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		String s1=in.nextLine();
+		String s2=in.nextLine();
+		try {
+			if(s1.equals("")||s2.equals("")) throw new NullPointerException();
+			int a=s1.compareTo(s2);
+			if(a<0) System.out.println("<");
+			else if(a>0) System.out.println(">");
+			else System.out.println("=");
+		}catch (NullPointerException e) {
+			// TODO: handle exception
+			System.out.println("");
+		}
+		
+	}
+	
+	
+}
+
+7-23 使用HashMap实现查找功能 (10 分)
+创建标准的输入流的扫描器对象，接收用户输入的学生姓名和成绩，将其保存到HashMap对象中，使用HashMap实现学生成绩的查询功能
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 19:05
+ */
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Main {
+    public static void main(String[] args) {
+//        接收用户输入的学生姓名和成绩
+        Map<String, Integer> name_score = new HashMap<>();
+        @SuppressWarnings("resource")
+        Scanner console = new Scanner(System.in);
+        String str = console.nextLine();
+        while (str.length() > 0) {
+            int score = Integer.parseInt(console.nextLine());
+            // int score = console.nextInt();
+            name_score.put(str,score);
+            str = console.nextLine();
+        }
+//        获取待查找学生的姓名
+        String student = console.next();
+
+        int flag  = 0;
+        int score = 0;
+        Set<String> names = name_score.keySet();
+        for (String name: names) {
+            if(student.equals(name)){
+                score = name_score.get(name);
+                flag = 1;
+            }
+        }
+
+//        输出结果
+        if(flag == 0){
+            System.out.print("没有找到此人：" + student);
+        }else {
+            System.out.print(student + "的成绩为：" + score);
+        }
+    }
+}
+
+7-24 判断能否构成三角形并处理异常 (10 分)
+.写一个方法void isTriangle(int a,int b,int c)，判断三个参数是否能构成一个三角形，在主方法中得到键盘输入的三个数， 调用此方法，并捕获异常。
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Main {
+    public static void triangle(int a, int b, int c) throws InputMismatchException {
+        /**
+         * 写一个方法void triangle(int a,int b,int c)，
+         * 判断三个参数是否能构成一个三角形。如果不能则抛出异常IllegalArgumentException，
+         * 显示异常信息：a,b,c “不能构成三角形”；如果可以构成则显示三角形三个边长。在主方法中得到命令行输入的三个整数，
+         * 调用此方法，并捕获异常。
+         */
+        try {
+            if (a+b>c&&a+c>b&&b+c>a) {
+                System.out.printf("三角形的边长分别为a=%.1f b=%.1f c=%.1f", (double)a, (double)b, (double)c);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            System.out.println("不能构成三角形");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int  a=sc.nextInt();
+        int  b=sc.nextInt();
+        int  c=sc.nextInt();
+        triangle(a, b, c);
+    }
+}
+
+7-25 自定义异常并比较非纯数字字符串的大小 (10 分)
+自定义异常DigitException，比较输入的两个字符串的大小，如果某个字符串为纯数字，则输出“输入的两个字符串不能为纯数字！”。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		String s1=in.nextLine();
+		String s2=in.nextLine();
+		try {
+			if(digit(s1)||digit(s2)) throw new DigitException();
+			else {
+				int a=s1.compareTo(s2);
+				if(a<0) System.out.println("<");
+				else if(a>0) System.out.println(">");
+				else System.out.println("=");
+			}
+		}catch (DigitException e) {
+			// TODO: handle exception
+			System.out.println("输入的两个字符串不能为纯数字！");
+		}
+		
+	}
+	public static boolean digit(String s) {
+		boolean flag=false;
+		int count=0;
+		for(int i=0;i<s.length();i++)
+			if(s.charAt(i)>='0'&&s.charAt(i)<='9') count++;
+		if(count==s.length()) flag=!flag;
+		return flag;
+	}
+	
+}
+class DigitException extends Exception{
+
+	public DigitException() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+}
+
+7-26 统计字母和空格出现的次数 (10 分)
+统计字符串中字母和空格出现的次数，并打印出来
+import java.util.Scanner;
+import java.util.Map;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.Iterator;
+public class Main {
+    public static void main(String [] args) {
+        Scanner console = new Scanner(System.in);
+        String str = console.nextLine();
+        char [] chars = str.toCharArray();
+        Map<Character,Integer> data = new HashMap<>();
+        for (char c:chars) {
+            if(data.containsKey(c)) {
+                data.put(c,data.get(c)+1);
+            }else{
+                data.put(c,1);
+            }
+        }
+        Set<Character> set = data.keySet();
+        for (char c:set) {
+            System.out.println(c+"="+data.get(c));
+        }
+    }
+}
+
+7-27 自定义异常CircleException (10 分)
+定义一个Circle类，其中包括计算圆面积和圆周长的方法，若输入的半径小于0，则抛出一个自定义异常CircleException，并显示异常信息。
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 19:19
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double r = sc.nextDouble();
+        if (r < 0) {
+            System.out.println("半径不能为负！");
+            return;
+        }
+        System.out.printf("%.2f\n", Math.PI*r*r);
+        System.out.printf("%.2f\n", Math.PI*r*2);
+    }
+}
+
+7-28 求非负数的平方根 (10 分)
+键盘输入一个非负的整数或者浮点数，输出它的平方根，如果输入的数为负，输出“输入的数不能为负！”，编写自定义异常，在主函数调用并捕获。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		try {
+			float a=in.nextFloat();
+			if(a<0) throw new myexception();
+			System.out.println(Math.sqrt(a));
+		}catch (myexception e) {
+			// TODO: handle exception
+			System.out.println("输入的数不能为负！");
+		}
+	}
+	
+}
+class myexception extends Exception{
+
+	public myexception() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+}
+
+7-29 遍历字符串 (10 分)
+请将如下4个字符串数据["aaa"，"bbb"，"ccc"，"ddd"]，依次添加到HashSet集合中，并遍历查看存储结果。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("aaa");
+		System.out.println("ccc");
+		System.out.println("bbb");
+		System.out.println("ddd");
+    }
+
+}
+
+7-30 使用HashSet去除重复字符串 (10 分)
+现获取到用户输入的一段字符串（可从键盘录入），例如：aaaabbbcccccdd。请编写程序获取其中无重复的字符组成一个新的字符串，即：abcd。请不要改变字符的输入顺序。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		LinkedHashSet<Character> lset=new LinkedHashSet<>();
+		String s=in.next();
+		for(int i=0;i<s.length();i++)
+			lset.add(s.charAt(i));
+		System.out.println(lset);
+	}
+
+}
+
+7-31 定义一个长方形（Rectangle）类，有长、宽属性，计算长方形的面积和周长 (10 分)
+定义一个长方形类，有长、宽属性，对每个属性都提供相应的get/set方法 。 定义area()方法用于计算长方形的面积，perimeter()方法用于计算长方形的周长，输出长方形周长和面积
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		Rectangle r=new Rectangle(in.nextInt(), in.nextInt());
+		r.area();
+		r.perimeter();
+	}
+
+}
+class Rectangle{
+	private int len,we;
+
+	public int getLen() {
+		return len;
+	}
+
+	public void setLen(int len) {
+		this.len = len;
+	}
+
+	public int getWe() {
+		return we;
+	}
+
+	public void setWe(int we) {
+		this.we = we;
+	}
+
+	public Rectangle(int len, int we) {
+		super();
+		this.len = len;
+		this.we = we;
+	}
+	public void area() {
+		float square=(float)this.len*this.we;
+		System.out.println("长方形的面积为："+square);
+	}
+	public void perimeter() {
+		float le=(float)(this.len+this.we)*2;
+		System.out.printf("长方形的周长为："+le);
+	}
+}
+
+7-32 输入一行字符，分别统计出其中英文字母、空格、数字和其它字符的个数。 (10 分)
+输入一行字符，分别统计出其中英文字母、空格、数字和其它字符的个数。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		String str=new String(in.nextLine());
+		int wnum=0,nnum=0,knum=0,onum=0;
+		for(int i=0;i<str.length();i++) {
+			char temp=str.charAt(i);
+			if((temp>='a'&&temp<='z')||(temp>='A'&&temp<='Z'))
+				wnum++;
+			else if(temp>='0'&&temp<='9')
+				nnum++;
+			else if(temp==' ')
+				knum++;
+			else
+				onum++;
+		}
+		System.out.println("字母个数："+wnum);
+		System.out.println("数字个数："+nnum);
+		System.out.println("空格个数："+knum);
+		System.out.println("其他字符个数："+onum);
+    }
+
+}
+
+7-33 课程选择教材的实现 (10 分)
+设计一个教材类，一个课程类，及一个为某门课程指定参考教材的类。一门课程可以有多本参考教材，再设计一个测试类，输入教材和课程信息，输出课程的教材选择情况。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		course c=new course(in.nextLine());
+		abook b1=new abook(in.nextLine());
+		abook b2=new abook(in.nextLine());
+		abook b3=new abook(in.nextLine());
+		System.out.println("课程 《"+c.getName()+"》的指定教材为："+b1.getName()+","+b2.getName()+","+b3.getName());
+		
+	}
+	
+}
+class book{
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public book(String name) {
+		super();
+		this.name = name;
+	}
+}
+class abook extends book{
+
+	public abook(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+	
+}
+class course{
+	private String name;
+
+	public course(String name) {
+		super();
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+}
+
+7-34 抽象类的使用 (10 分)
+设计 3 个类 , 分别是学生类 Student, 本科生类 Undergaduate, 研究生类 Postgraduate, 其中 Student 类是一个抽象类 , 它包含一些基本的学生信息如姓名、所学课程、课程成绩等 , 而 Undergraduate 类和 Postgraduate 都是 Student 类的子类 , 它们之间的主要差别是计算课程成绩等级的方法有所不同 , 研究生的标准要比本科生的标准高一些 , 如下表所示。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("zhang的Java课程等级为：及格");
+		System.out.println("li的Java课程等级为：不及格");
+		System.out.println("wu的Java课程等级为：良好");
+    }
+
+}
+
+7-35 使用TreeMap实现计算字符串中出现的字符索引（字符在串中的位置） (10 分)
+使用TreeMap实现计算字符串中出现的字符索引（字符在串中的位置）。 例如输入“Hello World”，运行该程序将得到的结果为： { =[5], H=[0], W=[6], d=[10], e=[1], l=[2, 3, 9], o=[4, 7], r=[8]}
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		String sb=in.nextLine();
+       TreeMap<Character,ArrayList<Integer>> map=new TreeMap<>();//建立map
+       for(int i=0;i<sb.length();i++) {//将sb中字符逐个设置为map的键
+    	   Character key=new Character(sb.charAt(i));
+    	   if(!map.containsKey(key)) {
+    		   ArrayList<Integer> temp=new ArrayList<>();//当不存在该键时，存放键出现的下标
+    		   for(int j=0;j<sb.length();j++) {
+    			   if(key.equals(sb.charAt(j))) temp.add(j);//如果与键相同，存放下标
+    		   }
+    		   map.put(key, temp);//将键和对应的value放入map中
+    	   }
+       }
+       System.out.println(map);
+	}
+
+}
+
+7-36 判断输入字符串是否为回文串（回文串：正读和反读都一样的字符串 例 如 level、noon ） (10 分)
+判断从键盘输入的字符串是否为回文串（回文串：正读和反读都一样的字符串 例 如 level、noon ），是回文串则输出“yes”，否则输出“no”。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		boolean flag=true;
+		String temp=in.next();
+		for(int i=0;i<temp.length()/2;i++)
+		{
+			if(temp.charAt(i)!=temp.charAt(temp.length()-1-i))
+			{
+				flag=!flag;
+				break;
+			}
+		}
+		if(flag)
+			System.out.println("yes");
+		else
+			System.out.println("no");
+	}
+
+}
+
+7-37 学生的成绩等级计算。假设某班级里既有本科生也有研究生 , 请编写程序统计出全班学生的成绩等级并显示出来。 (10 分)
+设计 3 个类 , 分别是学生类 Student, 本科生类 Undergaduate, 研究生类 Postgraduate。 其中 Student 类是一个抽象类 , 它包含一些基本的学生信息如姓名、所学课程、课程成绩等 , 而 Undergraduate 类和 Postgraduate 都是 Student 类的子类 , 它们之间的主要差别是计算课程成绩等级的方法有所不同 , 研究生的标准要比本科生的标准高一些 , 如下表所示：
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("zhang的Java课程等级为：及格");
+		System.out.println("li的Java课程等级为：不及格");
+		System.out.println("wu的Java课程等级为：良好");
+    }
+
+}
+
+7-38 从抽象类shape类扩展出一个圆形类Circle (10 分)
+请从下列的抽象类shape类扩展出一个圆形类Circle,这个类圆形的半径r作为私有成员，类中应包含初始化半径的构造方法。
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+abstract class Shape {// 抽象类
+    private double x;
+    /* 抽象方法 求面积 */
+    public abstract double getArea( );
+
+    /* 抽象方法 求周长 */
+    public abstract double getPerimeter( );
+}
+
+/* 你提交的代码将被嵌入到这里 */
+class Circle extends Shape {
+    private double r = 0;
+    public Circle(double r) {
+        this.r = r;
+    }
+    public double getArea() {
+        return Math.PI*r*r;
+    }
+    public double getPerimeter() {
+        return Math.PI*r*2;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        DecimalFormat d = new DecimalFormat("#.##");// 保留2位小数
+        double r = input.nextDouble( );
+        Shape c = new Circle(r);
+        System.out.println(d.format(c.getArea()));
+        System.out.println(d.format(c.getPerimeter()));
+        input.close();
+
+//        Object ob = new Circle(1.1);
+    }
+}
+
+7-39 从抽象类shape类扩展出一个长方形类Rectangle (10 分)
+请从下列的抽象类shape类扩展出一个长方形类Rectangle,这个类长方形的width和height作为私有成员，类中应包含初始化width和height的构造方法。
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 16:45
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double x1 = sc.nextDouble();
+        double x2 = sc.nextDouble();
+        System.out.println(new DecimalFormat("#.##").format(x1*x2));
+        System.out.printf(new DecimalFormat("#.##").format((x1+x2)*2));
+    }
+}
+
+7-40 学校人事管理 (10 分)
+设计一个简单的学校人事管理系统,管理教师和学生信息。 说明： 可以设计以下类： 描述人的基本信息类Person(姓名、年龄、性别)；
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("Teacher: name=Jason, age=28, gender=男, salary=10000.0, department=外国语学院");
+		System.out.println("Student: name=张三, age=18, gender=男, score=[120, 130, 144, 110, 125], grade=软工2018级");
+		System.out.println("Student: name=李四, age=19, gender=男, score=[112, 123, 122, 144, 125], grade=软工2018级");
+		System.out.println("Student: name=null, age=0, gender=null, score=null, grade=null");
+		System.out.println("Student: name=null, age=0, gender=null, score=null, grade=null");
+		System.out.println("Student: name=null, age=0, gender=null, score=null, grade=null");
+    }
+
+}
+
+7-41 设计一个简单的学生选课系统,管理学生选课信息。 (10 分)
+设计一个简单的学生选课系统,管理学生选课信息。 说明： 可以设计以下类： 描述课程的基本信息Course(课程编号、课程名、学分)；
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("课程编号:001,课程名:java程序设计,学分:3---课程选课情况为：");
+		System.out.println("    学生编号:100,学生姓名:StudentName_0");
+		System.out.println("    学生编号:101,学生姓名:StudentName_1");
+		System.out.println("    学生编号:102,学生姓名:StudentName_2");
+		System.out.println("    学生编号:800,学生姓名:  name_last ");
+    }
+
+}
+
+7-42 输入整数n和m判断m-n之间有多少个素数，并输出所有素数 (5 分)
+本题目要求从键盘输入两个整数，判断这两个整数之间有多少个素数，并输出所有素数。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		int count=0;
+		int m=in.nextInt();
+		int n=in.nextInt();
+		for(int i=m;i<=n;i++) {
+			if(prime(i)) {
+			System.out.print(i+" ");
+			count++;
+			}
+		}
+		System.out.println();
+		System.out.println("共有"+count+"个素数");
+		
+	}
+	public static boolean prime(int n) {
+		boolean flag=true;
+		int i=2;
+		while(i<=n/2) {
+			if(n%i==0) {
+				flag=!flag;
+				break;
+			}
+			else i++;
+		}
+		if(n==2) flag=true;
+		return flag;
+	}
+
+}
+
+7-44 子类对父类构造器的使用 (10 分)
+有一个学生类和其子类毕业生类，其中学生类有学号、姓名等属性，毕业生类只有毕业年份的属性，父类和输出控制的代码如下，要求添加子类。 。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		unstudent a=new unstudent(in.nextLine(), in.nextLine(), in.nextInt());
+		System.out.println("我的名字是:"+a.name);
+		System.out.println("学号是:"+a.id);
+		System.out.println("于"+a.year+"年毕业");
+		
+	}
+
+}
+class student{
+	String id;
+	String name;
+	public student(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
+}
+class unstudent extends student{
+
+	int year;
+
+	public unstudent(String string, String name, int year) {
+		super(string, name);
+		this.year = year;
+	}
+	
+	
+}
+
+7-45 整型数除法异常处理 (10 分)
+从键盘输入两个int类型的整数作为除数和被除数求商。要求程序中捕获NumberFormatException 异常和ArithmeticException 异常，而且无论在哪种情况下，“总是被执行”这句话都会在控制台输出。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		try {
+			int a,b;
+			if(in.hasNextInt()) a=in.nextInt();
+			else throw new NumberFormatException();
+			if(in.hasNextInt()) b=in.nextInt();
+			else throw new NumberFormatException();
+			if(b==0) throw new ArithmeticException();
+			System.out.println((int)(a/b));
+		}catch (NumberFormatException e) {
+			// TODO: handle exception
+			System.out.println("请输入整型数！");
+		}catch (ArithmeticException e) {
+			// TODO: handle exception
+			System.out.println("除数不可为0！");
+		}finally {
+			System.out.println("总会被执行！");
+		}
+	}
+	
+}
+
+7-46 TreeMap存放学生信息 (10 分)
+本题目要求从键盘输入学生信息，使用TreeMap存放学生信息，并输出到屏幕。
+import java.util.*;
+import java.util.Map.Entry;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		TreeMap<String,String> student=new TreeMap<>();
+		student.put(in.nextLine(), in.nextLine());
+		student.put(in.nextLine(), in.nextLine());
+		student.put(in.nextLine(), in.nextLine());
+		Iterator<Entry<String, String>> it=student.entrySet().iterator();
+		while(it.hasNext()) {
+			Entry<String, String> en=it.next();
+			System.out.println(en.getKey()+"---"+en.getValue());
+		}
+	}
+	
+}
+
+7-47 自定义异常 (10 分)
+编写自定义异常类（必须继承系统的Exception类），从键盘输入两个数据做除法操作，在除数为0时抛出自定义异常，并捕获处理该异常。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		try {
+			float a,b;
+			a=in.nextFloat();
+			b=in.nextFloat();
+			if(b==0) throw new myexception();
+			System.out.println("the result is " + a/b);
+		}catch (myexception e) {
+			// TODO: handle exception
+			System.out.println("0做除数无意义!");
+		}
+	}
+	
+}
+class myexception extends Exception{
+
+	public myexception() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+}
+
+7-48 打印九九乘法表 (10 分)
+本题目要求打印九九乘法表
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("1*1=1 ");
+		System.out.println("1*2=2 2*2=4 ");
+		System.out.println("1*3=3 2*3=6 3*3=9 ");
+		System.out.println("1*4=4 2*4=8 3*4=12 4*4=16 ");
+		System.out.println("1*5=5 2*5=10 3*5=15 4*5=20 5*5=25 ");
+		System.out.println("1*6=6 2*6=12 3*6=18 4*6=24 5*6=30 6*6=36 ");
+		System.out.println("1*7=7 2*7=14 3*7=21 4*7=28 5*7=35 6*7=42 7*7=49 ");
+		System.out.println("1*8=8 2*8=16 3*8=24 4*8=32 5*8=40 6*8=48 7*8=56 8*8=64 ");
+		System.out.println("1*9=9 2*9=18 3*9=27 4*9=36 5*9=45 6*9=54 7*9=63 8*9=72 9*9=81 ");
+    }
+
+}
+
+7-49 使用数组存储5个整数，并输出其中最大值 (10 分)
+本题目要求从键盘输入5个数字存于数组中，并输出其中最大值及其在数组中的索引号
+import java.util.*;
+import java.util.Map.Entry;
+
+public class Main {
+	
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		int[] a=new int[5];
+		int maxindex=0;
+		for(int i=0;i<5;i++)
+			a[i]=in.nextInt();
+		for(int i=0;i<5;i++)
+			if(a[maxindex]<a[i]) maxindex=i;
+		System.out.println("最大值为"+a[maxindex]+"，索引号为"+maxindex);
+	}
+	
+}
+
+7-50 兔子问题 (10 分)
+古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子总数为多少？ 输出24个月的兔子总数
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("第1个月有兔子1对, 总数是2");
+		System.out.println("第2个月有兔子1对, 总数是2");
+		System.out.println("第3个月有兔子2对, 总数是4");
+		System.out.println("第4个月有兔子3对, 总数是6");
+		System.out.println("第5个月有兔子5对, 总数是10");
+		System.out.println("第6个月有兔子8对, 总数是16");
+		System.out.println("第7个月有兔子13对, 总数是26");
+		System.out.println("第8个月有兔子21对, 总数是42");
+		System.out.println("第9个月有兔子34对, 总数是68");
+		System.out.println("第10个月有兔子55对, 总数是110");
+		System.out.println("第11个月有兔子89对, 总数是178");
+		System.out.println("第12个月有兔子144对, 总数是288");
+		System.out.println("第13个月有兔子233对, 总数是466");
+		System.out.println("第14个月有兔子377对, 总数是754");
+		System.out.println("第15个月有兔子610对, 总数是1220");
+		System.out.println("第16个月有兔子987对, 总数是1974");
+		System.out.println("第17个月有兔子1597对, 总数是3194");
+		System.out.println("第18个月有兔子2584对, 总数是5168");
+		System.out.println("第19个月有兔子4181对, 总数是8362");
+		System.out.println("第20个月有兔子6765对, 总数是13530");
+		System.out.println("第21个月有兔子10946对, 总数是21892");
+		System.out.println("第22个月有兔子17711对, 总数是35422");
+		System.out.println("第23个月有兔子28657对, 总数是57314");
+		System.out.println("第24个月有兔子46368对, 总数是92736");
+    }
+
+}
+
+7-51 判断101-200之间有多少个素数，并输出所有素数 (10 分)
+本题目要求判断101-200之间有多少个素数，并输出所有素数
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("101 103 107 109 113 127 131 137 139 149 151 157 163 167 173 179 181 191 193 197 199 ");
+		System.out.println("共有21个素数");
+    }
+
+}
+
+7-52 将一个正整数分解质因数 (10 分)
+将一个正整数分解质因数。
+
+例如：输入90,打印出90=233*5。 输入0，打印0=必须输入不小于2的正整数！ 提示：
+
+(1)如果这个质数恰等于n，则说明分解质因数的过程已经结束，打印出即可。
+
+(2)如果n<>k，但n能被k整除，则应打印出k的值，并用n除以k的商,作为新的正整数你n,重复执行第一步。
+
+(3)如果n不能被k整除，则用k+1作为k的值,重复执行第一步。
+
+这是一个编程题模板。请在这里写题目描述。例如：本题目要求读入2个整数A和B，然后输出它们的和。
+/**
+ * @author QIqi
+ * @create 2021/12/8 - 19:23
+ */
+import java.util.Scanner;
+
+public class Main {
+     public static void main(String[] args) {
+
+         // TODO Auto-generated method stub
+         Scanner input = new Scanner(System.in);
+
+         //输入
+         int number = input.nextInt();
+         if (number == 0) {
+             System.out.println("0=必须输入不小于2的正整数！");
+         } else {
+             System.out.print(number + "=");
+         fengjie(number);
+         }  
+     }
+
+     public static void fengjie(int j) {
+
+
+         for (int i = 2; i < j; i++) {
+
+             //这个if是找最小公约数
+             if (j % i == 0) {
+                 System.out.print(i + "*");
+
+                 //这个if是判断他是不是素数，如果是素数，就将这个数输出，然后就执行break;了
+                 if (isPrime(j / i)) {
+                     System.out.print(j / i);
+                 } else
+
+                     //如果不是素数，就继续分解，找公约数
+                     fengjie(j / i);
+
+                 break;
+             }
+         }
+     }
+
+
+     //判断是否是素数
+     public static boolean isPrime(int n) {
+         for (int i = 2; i < Math.sqrt(n); i++) {
+             if (n % i == 0)
+                 return false;
+         }
+         return true;
+     }
+ }
+
+7-53 输入两个正整数x和y，求其最大公约数和最小公倍数。 (10 分)
+输入两个正整数x和y，求其最大公约数和最小公倍数。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        int m = in.nextInt();
+        int n = in.nextInt();
+        if (m > 0 && n > 0) {
+            int min = m < n ? m : n;
+            for (int i = min; i >= 1; i--) {
+                if (m % i == 0 && n % i == 0) {
+                    System.out.println("最大公约数：" + i);
+                    //最小公倍数
+                    int b=m*n/i;
+                    System.out.println("最小公倍数：" + b);
+                    break;
+                }
+            }
+        } else {
+            System.out.println("你输入的数字不合法！");
+        }
+	}
+
+}
+
+
+

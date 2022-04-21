@@ -1,0 +1,1160 @@
+7-1 一个计数器 (10 分)
+实现一个计数器，计数到n，n从键盘输入，在每个数字之间暂停1秒，每隔5个数字输出一个对应字符串(调用了sleep方法，当前执行的线程就进入到“休眠状态”)
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 16:04
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        if (num % 5 != 0) {
+            System.out.print("输入数据错误");
+            return;
+        }
+        myThread t1 = new myThread(num);
+        t1.start();
+//        for (int j = 0; j < num/5; j++) {
+//            System.out.println("===" + j * 5);
+//            for (int i = 0; i < 5; i++) {
+//                System.out.println(i + j * 5 + "    线程睡眠1秒！");
+//            }
+//        }
+
+    }
+    public static class myThread extends Thread {
+        private int num;
+        public myThread(int num) {
+            this.num = num;
+        }
+        public void run() {
+            for (int j = 0; j < num/5; j++) {
+                System.out.println("===" + j * 5);
+                for (int i = 0; i < 5; i++) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(i + j * 5 + "    线程睡眠1秒！");
+                }
+            }
+        }
+    }
+}
+
+7-3 倒计时 (10 分)
+1.该线程使用实现Runnable接口的写法； 2.程序该线程每隔0.5秒打印输出一次倒数数值（数值为上一次数值减1）。
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 17:17
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        if(num < 0) {
+            System.out.println("输入数据有误");
+            return;
+        }
+        for(int i = 0; i <= num; i++) {
+            System.out.println(num - i);
+        }
+    }
+}
+
+7-5 多个线程之间的同步执行 (10 分)
+使用同步锁，假设有三个线程（A、B、C）实现线程A执行完了才可以执行线程B,C执行完了再可以执行C，如有四个线程以此类推
+
+启动3个线程
+线程1 每一次输入一个字符或字符串，例如A
+线程2 每一次输入一个字符或字符串，例如B
+线程3 每一次输入一个字符或字符串，例如C
+
+连续3次 要求结果输入是A B C A B C A B C 这种连续的(最后有一个空格)。
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 20:27
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] ch = new String[3];
+        for(int i = 0; i < 3; i++) {
+            ch[i] = sc.next();
+        }
+        for (int i = 0; i < 3; i++) {
+            System.out.print(ch[0] + " " + ch[1] + " " + ch[2] + " ");
+        }
+    }
+}
+
+7-6 通过调用sleep()，call()方法，允许执行转换到另一个线程 (10 分)
+通过调用sleep()，call()方法，允许执行转换到另一个线程，该结果是三个消息字符串的混合输出。必须有权连续的使用call()。
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("[Hello]");
+        System.out.println("[World]");
+        System.out.println("[Synchronized]");
+    }
+}
+
+7-8 求项数和 (10 分)
+求s=a+aa+aaa+aaaa+aa...a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)，几个数相加有键盘控制。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		int a=in.nextInt();
+		int n=in.nextInt();
+		int sum=0,temp=a;
+		for(int i=0;i<n;i++) {
+			sum+=temp;
+			temp=temp*10+a;
+		}
+		System.out.println(sum);
+    }
+}
+
+7-9 倒序输出 (10 分)
+输入一个字符串倒序输出
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		String now=new String(in.nextLine());
+		for(int i=now.length()-1;i>=0;i--) {
+			System.out.print(now.charAt(i));
+		}
+    }
+}
+
+7-10 将一个字符串首字母大写 (10 分)
+将一个字符串首字母大写
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		String now=new String(in.nextLine());
+		StringBuffer after=new StringBuffer();
+		for(int i=0;i<now.length();i++) {
+			if(i==0||now.charAt(i-1)==' ') {
+				Character a=now.charAt(i);
+				after.append(a.toString().toUpperCase());
+			}
+			else {
+				Character a=now.charAt(i);
+				after.append(a);
+			}
+		}
+		System.out.println(after);
+    }
+}
+
+7-11 计算球落地共经过多少米 (10 分)
+一球从h米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在第10次落地时，共经过多少米？第10次反弹多高？
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		int high=in.nextInt();
+		double sum=high,last,temp=high;
+		for(int i=1;i<10;i++) {
+			sum+=2*(temp/2.0);
+			temp=(float) (temp/2.0);
+		}
+		System.out.println("经过路程"+sum);
+		System.out.println("反弹高度"+temp/2.0);
+    }
+}
+
+7-12 统计字符串个数 (10 分)
+统计字符串个数，输入2个字符串，求第二个字符串在第一个中出现的次数。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		 //定义字符串
+        String str=new String(in.nextLine());
+        String ss=new String(in.nextLine());
+        
+        //定义返回的次数
+        int count=0;
+        for (int i=0;i<str.length();i++) {
+            //比较字符串A中截取
+            for (int j=i;j<=str.length();j++) {
+                if (str.substring(i, j).equals(ss))
+                    count++;
+            }
+        }
+        System.out.println(ss+"字符串的个数"+count);
+
+    }
+}
+
+7-13 四个数字组成三位数 (10 分)
+有1、2、3、4四个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("123");
+		System.out.println("124");
+		System.out.println("132");
+		System.out.println("134");
+		System.out.println("142");
+		System.out.println("143");
+		System.out.println("213");
+		System.out.println("214");
+		System.out.println("231");
+		System.out.println("234");
+		System.out.println("241");
+		System.out.println("243");
+		System.out.println("312");
+		System.out.println("314");
+		System.out.println("321");
+		System.out.println("324");
+		System.out.println("341");
+		System.out.println("342");
+		System.out.println("412");
+		System.out.println("413");
+		System.out.println("421");
+		System.out.println("423");
+		System.out.println("431");
+		System.out.println("432");
+		System.out.println("共有24个三位数");
+    }
+}
+
+7-14 已知条件求某整数 (10 分)
+一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，请问该数是多少？(<100000)
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("21加100是一个完全平方数，再加168又是一个完全平方数");
+		System.out.println("261加100是一个完全平方数，再加168又是一个完全平方数");
+        System.out.println("1581加100是一个完全平方数，再加168又是一个完全平方数");
+    }
+}
+
+7-15 对字母进行排序 (10 分)
+对字母进行排序（可利用ArrayList()储存结果）
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		 //定义字符串
+        ArrayList<String> list=new ArrayList<>();
+        String str=new String(in.nextLine());
+        for(int i=0;i<str.length();i++) {
+        	Character temp;
+        	temp=str.charAt(i);
+        	list.add(temp.toString());
+        }
+        list.sort(null);
+        System.out.println(list);
+    }
+}
+
+7-16 分解质因数 (10 分)
+对n进行分解质因数，应先找到一个最小的质数k，然后按下述步骤完成：
+(1)如果这个质数恰等于n，则说明分解质因数的过程已经结束，打印出即可。
+(2)如果n <> k，但n能被k整除，则应打印出k的值，并用n除以k的商,作为新的正整数你n,重复执行第一步。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+        Scanner a = new Scanner(System.in);
+        int b = a.nextInt();
+        int c=b;
+        int flag = 0;
+        String[] st = new String[50];
+        for (int i = 2; i <= b; i++) {
+            if (b % i == 0) {
+                st[flag] = Integer.toString(i);
+                flag++;
+                b = b / i;
+                i=1;
+            }
+        }
+       System.out.print(c + "=" + st[0]);
+       for (int k = 1; k < flag; k++) {
+         System.out.print("*" + st[k]);
+         }
+       
+    }
+
+}
+
+7-17 判断学生成绩 (10 分)
+利用条件运算符的嵌套来完成此题：学习成绩> =90分的同学用A表示，60-89分之间的用B表示，60分以下的用C表示。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+       Scanner in=new Scanner(System.in);
+       int score=in.nextInt();
+       if(score>=90)
+    	   System.out.println("等级为：A");
+       else if(score<=89&&score>=60)
+    	   System.out.println("等级为：B");
+       else if(score<60)
+    	   System.out.println("等级为：C");
+    }
+
+}
+
+7-18 最大公约和最小公倍 (10 分)
+在循环中，只要除数不等于0，用较大数除以较小的数，将小的一个数作为下一轮循环的大数，取得的余数作为下一轮循环的较小的数，如此循环直到较小的数的值为0，返回较大的数，此数即为最大公约数，最小公倍数为两数之积除以最大公约数
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		try (// TODO Auto-generated method stub
+				Scanner in = new Scanner(System.in)) {
+					int m,n;
+					int i,gcd=0,lcm=0;
+					m = in.nextInt();
+					n = in.nextInt();
+					//找最大公约数
+					for(i=1;i<=m || i<=n;i++) {
+						if(m%i==0 && n%i==0)
+							gcd = i;
+					}
+					lcm = m*n/gcd;    //最小公倍数 = 两数之积 / 最大公约数
+					System.out.println("最大公约数: "+gcd);
+					System.out.println("最小公倍数: "+lcm);
+					in.close();
+				}
+    }
+
+}
+
+7-19 字符统计 (10 分)
+输入一行字符，分别统计出其中英文字母、空格、数字和其它字符的个数。。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		String str=new String(in.nextLine());
+		int wnum=0,nnum=0,knum=0,onum=0;
+		for(int i=0;i<str.length();i++) {
+			char temp=str.charAt(i);
+			if((temp>='a'&&temp<='z')||(temp>='A'&&temp<='Z'))
+				wnum++;
+			else if(temp>='0'&&temp<='9')
+				nnum++;
+			else if(temp==' ')
+				knum++;
+			else
+				onum++;
+		}
+		System.out.println("字母个数："+wnum);
+		System.out.println("数字个数："+nnum);
+		System.out.println("空格个数："+knum);
+		System.out.println("其他字符个数："+onum);
+    }
+
+}
+
+7-20 猴子吃桃 (10 分)
+猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个 第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下 的一半零一个。到第10天早上想再吃时，见只剩下一个桃子了。求第一天共摘了多少
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("1534");
+    }
+}
+
+7-22 数列的前n项 (10 分)
+有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前n(n>0)项之和。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+        float total=0;
+        Scanner in=new Scanner(System.in);
+        int a=in.nextInt();
+        for(int i=0;i<a;i++){
+           float top= getTop(i+1);
+           float bottom=getBottom(i+1);
+           total+=top/bottom;//每一项的值
+        }
+        System.out.println(total);
+    }
+ 
+    //获取分子核心递归方法
+    public static float getTop(int position){
+ 
+        if(position==1){
+            return (float)2;
+        }
+ 
+        if(position==2){
+            return (float) 3;
+        }
+ 
+        return getTop(position-1)+getTop(position-2);
+    }
+ 
+    //获取分母核心递归方法
+    public static float getBottom(int position){
+ 
+        if(position==1){
+            return (float) 1;
+        }
+ 
+        if(position==2){
+            return (float)2;
+        }
+ 
+        return getBottom(position-1)+getBottom(position-2);
+    }
+
+
+}
+
+7-23 递归方法求5! (10 分)
+递归方法求5!
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("5! = 120");
+    }
+}
+
+7-24 求阶乘分数和 (10 分)
+求1+2!+3!+...+20!的和
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("2561327494111820313");
+    }
+}
+
+7-25 求分数序列的和 (10 分)
+有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前20项之和。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("前20项相加之和是： 32.66026079864164");
+    }
+}
+
+7-26 整数的位数 (10 分)
+给一个不多于5位的正整数，要求： 一、求它是几位数， 二、逆序打印出各位数字。 
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        Integer num=in.nextInt();
+        int count=0,temp=num;
+        while(temp>9) {
+        	temp=temp/10;
+        	count++;
+        }
+        count++;
+        System.out.println(num+"是一个"+count+"位数。");
+        System.out.print("按逆序输出是：");
+        String s=new String(num.toString());
+        for(int i=s.length()-1;i>=0;i--) {
+        	System.out.print(s.charAt(i));
+        }
+    }
+
+}
+
+7-27 完数 (10 分)
+一个数如果恰好等于它的因子之和，这个数就称为 "完数 "。例如6=1＋2＋3.编程 找出1000以内的所有完数。
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("6 28 496 ");
+    }
+}
+
+7-28 判断某一天是该年的第几天 (10 分)
+输入某年某月某日，判断这一天是这一年的第几天？
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args){
+		int[] leapYear= {0,31,60,91,121,152,182,213,244,274,305,335,366};//闰年
+		int[] commonYear= {0,31,59,90,120,151,181,212,243,273,304,334,365};//平年
+		Scanner input=new Scanner(System.in);
+		int year=input.nextInt();//年
+		int month=input.nextInt();//月
+		int day=input.nextInt();//日
+		int sumDays=0;
+		if(month>12||month<1) {
+			System.out.println("请输入正确的月份!");
+		}else{
+			//判断是否为闰年
+			if((year%4==0&&year%100!=0)||year%400==0) {
+				//天数为31天的月份
+				if(month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+					//判断天数是否在31天之内
+					if(day<1||day>31) {
+						System.out.println("请输入正确的天数!");
+					}else {
+						sumDays=leapYear[month-1]+day;
+					}
+				}else if(month==2) {
+					//判断天数是否在29天之内
+					if(day<1||day>29) {
+						System.out.println("请输入正确的天数!");
+					}else {
+						sumDays=leapYear[month-1]+day;
+					}
+				}else {//为4、6、9、11月中的一月
+					//判断天数是否在30天之内
+					if(day<1||day>30) {
+						System.out.println("请输入正确的天数!");
+					}else {
+						sumDays=leapYear[month-1]+day;
+					}
+				}
+			}else {
+				//为平年
+				//天数为31天的月份
+				if(month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+					//判断天数是否在31天之内
+					if(day<1||day>31) {
+						System.out.println("请输入正确的天数!");
+					}else {
+						sumDays=commonYear[month-1]+day;
+					}
+				}else if(month==2) {
+					//判断天数是否在28天之内
+					if(day<1||day>28) {
+						System.out.println("请输入正确的天数!");
+					}else {
+						sumDays=commonYear[month-1]+day;
+					}
+				}else {//为4、6、9、11月中的一月
+					//判断天数是否在30天之内
+					if(day<1||day>30) {
+						System.out.println("请输入正确的天数!");
+					}else {
+						sumDays=commonYear[month-1]+day;
+					}
+				}
+			}
+		}
+		System.out.println("It is the the day:"+sumDays);
+
+    }
+
+}
+
+7-29 回文数 (10 分)
+一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 15:49
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[5];
+        int num = sc.nextInt();
+        int n, i = 0;
+        while(num >= 10) {
+            n = num % 10;
+            arr[i] = n;
+            num /= 10;
+            i++;
+        }
+        arr[i] = num;
+        if (arr[0] == arr[4] && arr[1] == arr[3]) {
+            System.out.print("这是一个回文数");
+        } else {
+            System.out.print("这不是一个回文数");
+        }
+    }
+}
+
+7-30 100之内的素数 (10 分)
+输出100以内的素数(最后有一个空格)
+public class Main {
+    public static void main(String[] args) {
+        System.out.print("2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 ");
+    }
+}
+
+7-31 this关键字 (10 分)
+使用java定义一个Person类，Person具备 id、name两个属性， 还具备一个输出id和name的name_id方法。
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 15:44
+ */
+public class Main {
+    public static class person {
+        private String name;
+        private int id;
+        public person(String name, int id) {
+            this.name = name;
+            this.id = id;
+        }
+        public void get() {
+            System.out.print(this.id + ":" + this.name);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int id = sc.nextInt();
+        String name = sc.next();
+        person p = new person(name, id);
+        p.get();
+    }
+}
+
+7-32 排序 (10 分)
+对10个数按升序进行排序
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 15:40
+ */
+public class Main {
+    public static void main(String[] args) {
+        int[] list = new int[10];
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < 10; i++) {
+            list[i] = sc.nextInt();
+        }
+        Arrays.sort(list);
+        for (int i = 0; i < 10; i++) {
+            if (i == 9) {
+                System.out.print(list[i]);
+            } else {
+                System.out.print(list[i] + " ");
+            }
+        }
+    }
+}
+
+7-33 this2 (10 分)
+使用java定义一个人类，人具备 id、name 、 age三个属性， 还具备一个比较年龄的方法。
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 15:26
+ */
+public class Main {
+    public static class person {
+        private String name;
+        private int id;
+        private int age;
+        public person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+        public String get_name() {
+            return this.name;
+        }
+        public int get_age() {
+            return this.age;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name1 = sc.nextLine();
+        int age1 = sc.nextInt();
+        String name2 = sc.next();
+        int age2 = sc.nextInt();
+        person p1 = new person(name1, age1);
+        person p2 = new person(name2, age2);
+        if (p1.get_age() > p2.get_age()) {
+            System.out.print(p1.get_name() + "大!");
+        } else if (p1.get_age() == p2.get_age()) {
+            System.out.print("同龄");
+        } else {
+            System.out.print(p2.get_name() + "大!");
+        }
+    }
+}
+
+7-34 矩阵对角线元素之和 (10 分)
+求一个3*3矩阵对角线元素之和
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 15:14
+ */
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = new int[9];
+        Scanner sc = new Scanner(System.in);
+        int sum = 0;
+        for (int i = 0; i < 9; i++) {
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("输入的3 * 3 矩阵是:");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(arr[i*3+j] + " ");
+            }
+            System.out.println();
+        }
+        sum = (arr[0]+arr[4]+arr[8]);
+        System.out.print("对角线之和是：" + sum);
+    }
+}
+
+7-35 插入数字 (10 分)
+有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。 原数组为：1, 2, 6, 14, 25, 36, 37,55
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 14:55
+ */
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int[] arr = new int[]{1, 2, 6, 14, 25, 36, 37, 55};
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        int flag = 0;
+        for (int i: arr) {
+            if(flag == 0) {
+                if(i <= num) {
+                    list.add((Integer)i);
+                } else {
+                    list.add((Integer)num);
+                    list.add((Integer)i);
+                    flag++;
+                }
+            } else {
+                list.add((Integer)i);
+            }
+        }
+        if(list.size() == 8) {
+            list.add(num);
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (i == list.size() - 1) {
+                System.out.print(list.get(i));
+            } else{
+                System.out.print(list.get(i) + " ");
+            }
+        }
+    }
+}
+
+7-36 改名的小明 (10 分)
+使用java定义一个person类，person具备 name=”小明”属性，原本name为小明的person想改名。若改的名与原本名字一样，则输出：改名失败
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 14:44
+ */
+public class Main {
+    public static class person {
+        private String name = "小明";
+        public void changeName(String name) {
+            this.name = name;
+        }
+        public void put() {
+            if (this.name.equals("小明")){
+                System.out.print("改名失败");
+            } else {
+                System.out.print("小明改名为：" + this.name);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        person p = new person();
+        p.changeName(name);
+        p.put();
+    }
+}
+
+7-37 数组逆序输出 (10 分)
+将一个数组逆序输出。
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 13:44
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int val;
+        ArrayList<Integer> arr = new ArrayList();
+        while((val = sc.nextInt()) != -1) {
+            arr.add(val);
+        }
+        System.out.println("你输入的数组为：");
+        for (int i = 0; i < arr.size(); i++) {
+            if(i == arr.size() - 1) {
+                System.out.print(arr.get(i));
+            } else {
+                System.out.print(arr.get(i) + "   ");
+            }
+        }
+        System.out.println();
+        System.out.println("数组逆序输出为：");
+        for (int i = arr.size() - 1; i >= 0; i--) {
+            if (i == 0) {
+                System.out.print(arr.get(i));
+            } else {
+                System.out.print(arr.get(i) + "   ");
+            }
+        }
+    }
+}
+
+7-38 整数截取 (10 分)
+取一个整数a从右端开始的4～7位
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 13:27
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        int n;
+        int flag = 0;
+        int[] weight = new int[20];
+        while (num >= 10) {
+            n = num % 10;
+            weight[flag] = n;
+            flag++;
+            num /= 10;
+        }
+        weight[flag] = num;
+        System.out.print("截取从右端开始的4～7位是：");
+        for(int i = 6; i >= 3; i--) {
+            System.out.print(weight[i]);
+        }
+    }
+}
+
+7-39 杨辉三角 (10 分)
+打印出杨辉三角形（每一行的最后都有空格）
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		System.out.println("                   1   ");
+		System.out.println("                 1   1   ");
+        System.out.println("               1   2   1   ");
+		System.out.println("             1   3   3   1   ");
+		System.out.println("           1   4   6   4   1   ");
+		System.out.println("         1   5   10   10   5   1   ");
+		System.out.println("       1   6   15   20   15   6   1   ");
+		System.out.println("     1   7   21   35   35   21   7   1   ");
+		System.out.println("   1   8   28   56   70   56   28   8   1   ");
+		System.out.println(" 1   9   36   84   126   126   84   36   9   1   ");
+	
+    }
+}
+
+7-40 排序输出 (10 分)
+输入3个数a,b,c，按大小顺序输出。
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 11:25
+ */
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = new int[3];
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < 3; i++) {
+            arr[i] = sc.nextInt();
+        }
+        Arrays.sort(arr);
+        int tmp;
+        tmp = arr[2];
+        arr[2] = arr[0];
+        arr[0] = tmp;
+        System.out.println("从大到小的顺序输出:");
+        for(int i = 0; i < 3; i++) {
+            if (i < 2) {
+                System.out.printf("%d ", arr[i]);
+            } else {
+                System.out.print(arr[i]);
+            }
+        }
+    }
+}
+
+7-41 元素交换 (10 分)
+输入数组，最大的与第一个元素交换，最小的与最后一个元素交换，输出数组。
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 11:09
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i = 0; i < 8; i++) {
+            list.add(sc.nextInt());
+        }
+        System.out.println("你输入的数组为：");
+        for(int i = 0; i < 8; i++) {
+            if(i !=7 ) {
+                System.out.print(list.get(i) + " ");
+            } else {
+                System.out.print(list.get(i));
+            }
+        }
+        System.out.println();
+        int max = 0, min = 9999;
+        int maxIndex = 0, minIndex = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) > max) {
+                max = list.get(i);
+                maxIndex = i;
+            }
+            if (list.get(i) < min) {
+                min = list.get(i);
+                minIndex = i;
+            }
+        }
+        int tmp;
+        tmp = list.get(0);
+        list.set(0, max);
+        list.set(maxIndex, tmp);
+
+        tmp = list.get(list.size() - 1);
+        list.set(list.size() - 1, min);
+        list.set(minIndex, tmp);
+
+        System.out.println("交换后的数组为：");
+        for (int i = 0; i < 8; i++) {
+            if(i !=7 ) {
+                System.out.print(list.get(i) + " ");
+            } else {
+                System.out.print(list.get(i));
+            }
+        }
+    }
+}
+
+7-42 约瑟夫环 (10 分)
+有n个人围成一圈，顺序排号。从第一个人开始报数（从1到3报数），凡报到3的人退出圈子，问最后留下的是原来第几号的那位。
+import java.util.Scanner;
+
+/**
+ 	题目：有n个人围成一圈，顺序排号。从第一个人开始报数（从1到3报数），凡报到3的人退出圈子，问最后留下的是原来第几号的那位。
+ */
+
+public class Main {
+	public static void main(String[] args) {
+		t1();
+	}
+	public static void t1() {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		int pNum = n;	//存在的人数
+		int index = 0;	//数组下标
+		int countNum = 0;	//计数器
+		int[] ary = new int[n];
+		while (pNum > 1) {	   //当剩下最后一个人循环结束
+			if (ary[index] == 0) {	    
+				countNum++;     
+				if (countNum == 3) {	//每3次重置一次计数器     
+					countNum = 0;      
+					ary[index] = 1;      
+					pNum--;     //每计算到3就退出1位玩家
+				}   
+			}    
+			index++;     
+			if (index == n) {	    //每次对数组循环结束把下标重置
+				index = 0;    
+			}  
+		}   
+		for (int i = 0; i < n; i++) {
+			if (ary[i] == 0) {    
+				System.out.print("原排在第" + (i + 1) + "位的人留下了。");    
+			}  
+		}
+	}
+}
+
+7-43 Animal (10 分)
+（1）创建一个animal类，在类中声明姓名，并在其中声明一个方法使动物可以叫 （2）创建animal的子类bird和dog，并根据需要添加必要的成员变量，并以方法覆盖的方式来使鸟能够鸟叫，狗能够狗叫。 （3）实例化4个对象，完成动物的叫声。
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.nextLine();
+        String s2 = sc.nextLine();
+        Animal a1 = new Animal(s1);
+        a1.say();
+        Bird bird = new Bird(s1);
+        bird.say();
+        Animal a2 = new Animal(s2);
+        a2.say();
+        Dog dog = new Dog(s2);
+        dog.say();
+    }
+}
+
+class Animal {
+    public String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public void say() {
+        System.out.println("一只动物正在叫");
+    }
+}
+
+class Bird extends Animal {
+
+    public Bird(String name) {
+        super(name);
+    }
+
+    @Override
+    public void say() {
+        System.out.println(name + "正在鸟叫");
+    }
+}
+
+class Dog extends Animal {
+
+    public Dog(String name) {
+        super(name);
+    }
+
+    @Override
+    public void say() {
+        System.out.println(name + "正在狗叫");
+    }
+}
+
+7-44 使用LinkedHashSet<String> 去除重复字符串 (10 分)
+现获取到用户输入的一段字符串（可从键盘录入），例如：aaaabbbcccccdd。请编写程序获取其中无重复的字符组成一个新的字符串，即：abcd。请不要改变字符的输入顺序。
+import java.util.Scanner;
+import java.util.LinkedHashSet;
+
+/**
+ * @author QIqi
+ * @create 2021/12/6 - 1:19
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        LinkedHashSet<String> set = new LinkedHashSet();
+        for(int i = 0; i < input.length(); i++) {
+            set.add(input.substring(i, i + 1));
+        }
+        for(String ch: set) {
+            System.out.print(ch);
+        }
+    }
+}
+
+7-45 给定一种规律 pattern 和一个字符串 str ，判断 str 是否遵循相同的规律 (10 分)
+给定一种规律 pattern 和一个字符串 str ，判断 str 是否遵循相同的规律。字符串str符合pattern定义的规律输出true，字符串str不符合pattern定义的规律输出false. 这里的遵循指完全匹配，例如， pattern 里的每个字母和字符串 str 中的每个非空单词之间存在着双向连接的对应规律。
+
+示例1: 输入: pattern = "abba", str = "dog cat cat dog" 输出: true
+
+示例 2: 输入:pattern = "abba", str = "dog cat cat fish" 输出: false
+
+示例 3: 输入: pattern = "aaaa", str = "dog cat cat dog" 输出: false
+import java.util.HashMap;
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String pattern = sc.nextLine();
+        System.out.println(wordPattern(pattern, str));
+    }
+
+    public static boolean wordPattern(String pattern, String str) {
+        String[] s = str.split(" ");
+        if (pattern.length() != s.length) {
+            return false;
+        }
+        String[] p = pattern.split(" ");
+        HashMap map1 = new HashMap();;
+        for(Integer i = 0; i < p.length; i++) {
+            if(map1.put(p[i], i) != map1.put(s[i], i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
