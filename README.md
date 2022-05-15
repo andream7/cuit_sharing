@@ -64,4 +64,5 @@
   - jiyeme
   - CurryWOE
   - Sioncovy
+  - Xorex
 
