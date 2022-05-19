@@ -62,4 +62,7 @@
   - happi0
   - Quartzkun
   - jiyeme
+  - CurryWOE
+  - Sioncovy
+  - Xorex
 

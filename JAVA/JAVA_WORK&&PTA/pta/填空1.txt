@@ -1,0 +1,782 @@
+4-1文件操作，字节流处理。要求利用缓冲方式从d盘中的test1.txt读取，再转存到d盘中的test2.txt文件。
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+public class BufferedInputStreamDemo {
+    public static void main(String[] args) {
+        // 定义缓冲流类型的变量
+        BufferedInputStream bi = null;
+        BufferedOutputStream bo = null;
+        try { 
+            bi = new BufferedInputStream(new FileInputStream("d:\\test1.txt"));//利用字节流对象创建一个输入缓冲流        
+        bo = new BufferedOutputStream(new FileOutputStream("d:\\test2.txt")); //利用字节流对象创建一个输出缓冲流
+            int result = 0;
+            System.out.println("文件中的结果如下：");
+            while ((result = bi.read()) != -1) {
+                System.out.print((char) result);
+                
+bo.write(result);//往输出流写数据
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try { // 关闭缓冲流
+                bi.close();
+                bo.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+}
+
+4-2
+文件操作，字符流处理。填空实现从键盘输入内容，通过BufferedReader缓冲方式按行读取，并采用BufferedWriter输出到D盘input.txt文件中。
+
+import java.io.*;
+import java.util.Scanner;
+
+public class BufferedFW{
+    public static void main(String[] args) {
+        try {
+            // 将标准输入字节流转换为字符流
+            Scanner in = new Scanner(System.in);
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));//利用字符流对象创建一个输入缓冲流 
+            BufferedWriter bw = new BufferedWriter(new FileWriter("D:\\input.txt"));//利用字符流对象创建一个输出缓冲流
+            String s = "";
+            do {
+                System.out.println("请输入，直到输入exit结束");
+                s = br.readLine();// 每次读取一行
+                System.out.println(s);
+                
+bw.write(s);// 写入输出缓冲区
+                bw.flush();// 清空缓冲区
+                bw.newLine(); // 文件另起一行
+            } while (!"exit".equals(s));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+4-3
+网络编程操作，以下程序完成网络编程客户端功能实现。
+
+import java.net.; 
+import java.io.; 
+public class client_socket {
+          public static void main(String[] args) throws IOException {
+
+   Socket socket =new Socket("localhost", 8099);//创建一个地址为localhost、端口号为8099的套接字
+   try {
+       BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));//创建输入流从套接字读取数据
+       BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));//创建输出流往套接字写数据
+       for (int i = 0; i < 10; i++) {
+           String str = in.readLine();
+           System.out.println("client-server say:  " + str);
+           out.write(str);//向套接字写数据
+       }
+       out.write("END");
+   } finally {
+       System.out.println("closing...");
+       socket.close();
+   }
+}
+}
+
+4-4
+网络编程操作，以下代码完成网络编程服务器端实现。
+
+import java.io.;
+import java.net.; 
+public class server_socket { 
+public static void main(String[] args) throws IOException {
+    ServerSocket s = new ServerSocket(8099);
+    try {
+        Socket socket =s.accept();// 建立accept()方法监听客户机的连接
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));//建立socket输入流从套接字读取数据
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));//建立socket输出流向套接字写数据
+            while (true) {
+                String str =in.readLine();// 按行接收客户端信息
+                if (str.equals("END"))
+                    break;
+                out.write(str);
+            }
+        } finally {
+            System.out.println("closing...");
+            socket.close();
+        }
+    } finally {
+        s.close();
+    }
+}
+}
+
+4-5
+使用TCP 的Socket网络编程知识实现本地的客户端与服务器的交流: 具体表现为: 在客户端输入一段内容，然后在服务器输出该内容。 直到客户端输入为“bye”，两端才断开连接。 提示：用线程结合TCP相关知识，注意输入输出格式！ Server，Client类都应实现Runnable接口 对于Server类：接收来自client的信息，然后根据题意处理输出结果 对于Client类：向server发送信息。
+
+class Client implements Runnable {
+    private String IP;
+    private int port;
+    public Client() {
+    }
+
+    public Client(String IP, int port) {
+        this.IP = IP;
+        this.port = port;
+    }
+    public void clientStart() throws IOException {
+        Scanner in = new Scanner(System.in);        
+        Socket client =new Socket(IP,port);//1、指定端口  使用Socket创建客服端 + 服务的地址和端口
+        System.out.println("客服端建立完成!");
+        DataOutputStream dos = null;
+        //2、数据操作：客户端输入输出流
+        while (true) {
+            dos = new DataOutputStream(client.getOutputStream());
+            String str = in.nextLine();
+            dos.writeUTF(str);
+            dos.flush();
+            if (str.equals("bye")) {
+                break;
+            }
+        }
+        //3、释放资源*/
+        dos.close();
+        client.close();
+    }
+
+    @Override
+    public void run() {
+        try {
+            clientStart();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class Server 
+implements Runnable
+ {//声明服务器端线程类
+    private int port;
+    public Server() {
+    }
+
+    public Server(int port) {
+        this.port = port;
+    }
+
+    public void serverStart() throws IOException {       
+        //不同的协议端口一样不会冲突
+        ServerSocket server =new ServerSocket(port); //1、指定端口  使用ServerSocket创建服务器
+        System.out.println("服务器建立完成!");
+
+        Socket client =server.accept();   //2、阻塞式的等待连接  accept       
+        DataInputStream dis;
+        while (true) {
+            dis = new DataInputStream(client.getInputStream()); //3、数据操作：服务器端输入流
+            String str = dis.readUTF();
+            System.out.println("服务器接收: " + str);
+            if (str.equals("bye")) {
+                break;
+            }
+        }
+        //4、释放资源
+        System.out.println("服务器与客服端断开了连接...");
+        dis.close();
+        client.close();
+    }
+
+    @Override
+    public void run() {
+        try {
+            serverStart();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+4-6
+类的构造方法操作，请填写恰当语句完成类的构造方法。
+
+public class Person {
+  private String name;
+    private String gender; 
+    private int age;
+   public Person(String name, String gender) {
+       this.name = name;
+       this.gender = gender;
+             }
+  public Person(String name, int age, String gender) {
+       
+this(name, gender);
+      this.age = age;
+            }
+}
+
+5-1本题目要求读入两个整数 A 和 B，输出 A+B 的值。
+import java.util.Scanner;
+public class Main {
+    public static void main (String args[]) {
+          Scanner reader = new Scanner(System.in);
+          int a= reader.nextInt();
+          int b= reader.nextInt();
+          System.out.print(a + b);  
+    }
+}
+
+5-2
+List操作，包括List元素的添加、删除和List遍历。
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+public class Main {
+    public static List<String> arrayList;
+    public static void init() {
+        arrayList = new ArrayList<String>(4);
+        arrayList.add("first");
+        arrayList.add("second");
+        arrayList.add("third");
+        arrayList.add("forth");
+    }
+    public static void travel(){
+        System.out.println( arrayList.size());//获取List遍历前的长度
+        // 使用迭代器进行遍历
+        Iterator<String> iterator = arrayList.iterator();//获取迭代器
+        int i = 0;
+        while (iterator.hasNext()) {
+            String str = iterator.next(); 
+            i++;
+            System.out.println(str);
+            if (i % 3 == 0) 
+                  // 通过迭代器删除元素
+                  iterator.remove();
+        }
+        for(String str: arrayList){ //for-each语句遍历
+            System.out.println(str);
+        }
+    }
+    public static void main(String args[]) {
+        init();
+        travel();
+    }
+}
+
+5-3
+Map的操作，包括Map的遍历、获取entry集、key集。
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
+
+public class Main {
+    public static void main(String args[]) {
+        HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+        hashMap.put("Tom", new Integer(23));
+        Set<Map.Entry<String, Integer>> set = hashMap.entrySet();//获取映射的entry（键值对）集
+        for (Entry entry: set) { //for-each语句遍历entry集
+            System.out.println(entry.getKey() + "-" + entry.getValue());
+        }
+        Set<String> keySet = hashMap.keySet();//获取映射的key（键）集
+        StringBuffer buffer = new StringBuffer("");
+        for (String str : keySet) {
+            buffer.append(str + ",");
+        }
+        String str = buffer.substring(0, buffer.length() - 1);
+        System.out.println(str);
+    }
+}
+
+5-4
+线程同步。售票系统，4个窗口售票，不允许重票、错票。
+
+public class Main { public static void main(String args[]){ SellThread st=new SellThread(); new Thread(st).start(); new Thread(st).start(); new Thread(st).start(); new Thread(st).start(); } } class SellThread implements Runnable{ int tickets=10; public void run(){ while(tickets>0){ //卖完停止售票 sell(); } } public 
+synchronized
+ void sell(){ //定义 同步方法 if(
+tickets > 0
+ ){
+System.out.println(" sell tickets: "+tickets); tickets--; } } }
+
+5-5
+本题目要求遍历数组中的值并打印。
+
+import java.util.Arrays;
+class Main {
+   public static void main(String args[]) {
+    
+char[] a={'a','b','c','d'}; //定义字符数组a[]
+     for(int n=0;n<a.length;n++) { //传统方式
+         System.out.print(a[n]+" ");
+     }
+     System.out.println();
+    for(char ch: a){ //循环变量ch依次取数组a的每一个元素的值(for-each语句)
+        System.out.print(ch+" ");
+     }  
+     System.out.println();
+      
+System.out.println(Arrays.toString(a));//在屏幕上输出
+  }
+}
+
+5-6
+这是程序填空题模板。题目要求写在这里。例如：本题目要求打印“Hello World!”。
+
+import java.util.TreeSet;
+
+public class Main {
+    public static void main(String args[]) {
+        TreeSet<String>  treeSet = new TreeSet<String>();//构造泛型为String的TreeSet对象
+        // 添加元素
+        treeSet.add("first");
+        treeSet.add("second");
+        treeSet.add("third");
+        treeSet.add("forth");
+        System.out.println(treeSet);
+        for( String str: treeSet){//遍历
+            System.out.println(str);
+        }
+    }
+} 
+
+5-7
+映射操作。TreeMap的创建与遍历。
+
+import java.util.TreeMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
+
+public class Main {
+    public static void main(String args[]) {
+        TreeMap<String, Integer> treeMap =  new TreeMap<String, Integer>();//创建TreeMap,指定String、Integer泛型
+        treeMap.put("Tom", new Integer(23));
+        treeMap.put("Rose", new Integer(18));
+        treeMap.put("Jane", new Integer(26));
+        treeMap.put("Black", new Integer(24));
+        treeMap.put("Smith", new Integer(21));
+        Set<Map.Entry<String, Integer>> set = treeMap.entrySet();//获取treeMap的entry集（键值对集）
+        for (Entry entry: set) { //for-each 语句实现entry集遍历
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+        Set<String> keySet = treeMap.keySet();
+        StringBuffer buffer = new StringBuffer("");
+        for (String str : keySet) {
+            buffer.append(str + ",");
+        }
+        String str = buffer.substring(0, buffer.length() - 1);
+        System.out.println(str);
+    }
+}
+
+5-8
+在下面的程序中，使用方法重载分别实现了2个和3个整数的相加，请将下面的程序填写完整。
+
+程序写在这里。下面的空分值是2分。
+
+class AddOver{ public
+int add(int a, int b)
+{ return a+b; } public int add(int a, int b, int c){ return a+b+c; } } public cladd Blank2{ public static void main(String[] args){ AddOver a = 
+new AddOver(); System.out.println(a.add(1,2)); System.out.println(a.add(1,2,3)); }
+
+6-1 从抽象类shape类扩展出一个圆形类Circle (10 分)
+请从下列的抽象类shape类扩展出一个圆形类Circle,这个类圆形的半径r作为私有成员，类中应包含初始化半径的构造方法。
+
+public abstract class shape {// 抽象类
+
+        public abstract double getArea();// 求面积
+
+        public abstract double getPerimeter(); // 求周长
+}
+主类从键盘输入圆形的半径值，创建一个圆形对象，然后输出圆形的面积和周长。保留2位小数。
+
+函数接口定义：
+圆形类名Circle
+裁判测试程序样例：
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+abstract class Shape {// 抽象类
+     /* 抽象方法 求面积 */
+    public abstract double getArea( );
+
+    /* 抽象方法 求周长 */
+    public abstract double getPerimeter( );
+}
+
+/* 你提交的代码将被嵌入到这里 */
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        DecimalFormat d = new DecimalFormat("#.##");// 保留2位小数
+        double r = input.nextDouble( ); 
+        Shape c = new  Circle(r);
+        System.out.println(d.format(c.getArea()));
+        System.out.println(d.format(c.getPerimeter()));
+        input.close();
+    }
+}
+
+class Circle extends Shape {
+    private double r = 0;
+    public Circle(double r) {
+        this.r = r;
+    }
+    public double getArea() {
+        return Math.PI*r*r;
+    }
+    public double getPerimeter() {
+        return Math.PI*r*2;
+    }
+}
+
+
+6-2 从抽象类shape类扩展出一个长方形类Rectangle (10 分)
+请从下列的抽象类shape类扩展出一个长方形类Rectangle,这个类长方形的width和height作为私有成员，类中应包含初始化width和height的构造方法。
+
+abstract class Shape {// 抽象类
+
+     // 抽象方法 求面积 
+    public abstract double getArea( );
+
+   / / 抽象方法 求周长
+    public abstract double getPerimeter( );
+}
+主类从键盘输入长方形的长和宽，创建一个长方形对象，然后输出长方形的面积和周长。保留2位小数。
+
+函数接口定义：
+长方形类名Rectangle
+裁判测试程序样例：
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+abstract class Shape {// 抽象类
+
+     /* 抽象方法 求面积 */
+
+    public abstract double getArea( );
+
+    /* 抽象方法 求周长 */
+
+    public abstract double getPerimeter( );
+}
+
+/* 你提交的代码将被嵌入到这里 */
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        DecimalFormat d = new DecimalFormat("#.##");// 保留2位小数
+        double width = input.nextDouble( );
+        double height = input.nextDouble( );
+        Shape c = new  Rectangle(width,height);
+        System.out.println(d.format(c.getArea()));
+        System.out.println(d.format(c.getPerimeter()));
+        input.close();
+    }
+}
+
+
+/* 请在这里填写答案 */
+class Rectangle extends Shape {
+    private double weight = 0;
+    private double height = 0;
+    public Rectangle(double weight, double height) {
+        this.weight = weight;
+        this.height = height;
+    }
+    public double getArea() {
+        return height*weight;
+    }
+    public double getPerimeter() {
+        return 2*(height+weight);
+    }
+}
+
+6-3 买电影票 (10 分)
+模拟两个人排队买票，张飞，李逵买电影票，售票员只有两张5元的钱，电影票5元前一张。张飞拿20元一张的新人民币排在李逵的前面买票，李逵拿一张5元的人民币买票，张飞等待
+
+函数接口定义：
+private synchronized void saleTicket(int money)；
+在这里解释接口参数。例如：其中 N 和 D 都是用户传入的参数。 N 的值不超过int的范围； D 是[0, 9]区间内的个位数。函数须返回 N 中 D 出现的次数。
+
+裁判测试程序样例：
+public class Main {
+    public static void main(String[] args) {
+        TicketHouse officer = new TicketHouse();
+        Thread zhangfei,likui;
+        zhangfei = new Thread(officer);
+        zhangfei.setName("张飞");
+        likui = new Thread(officer);
+        likui.setName("李逵");
+        zhangfei.start();
+        likui.start();
+    }
+}
+
+class TicketHouse implements Runnable{
+    int fiveAmount = 2, tenAmount = 0, twentyAmount = 0;
+    public void run() {
+        if(Thread.currentThread().getName().equals("张飞")) {
+            saleTicket(20);
+        }else if (Thread.currentThread().getName().equals("李逵")) {
+            saleTicket(5);
+        }
+    }    
+   /* 请在这里填写答案 */
+}
+
+private synchronized void saleTicket(int money) {
+        String custom = Thread.currentThread().getName();
+        if (money == 20) {
+            if (this.fiveAmount < 3) {
+                System.out.println(custom + "靠边等...");
+                try {
+                    this.wait();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println(custom + "继续买票");
+            fiveAmount-=3;
+            twentyAmount++;
+            System.out.println(custom + "入场券，" + custom + "给20，找赎15元");
+        } else if (money == 5) {
+            System.out.print("给" + custom + "入场券");
+            fiveAmount++;
+            System.out.println(custom + "的钱正好");
+            this.notify();
+        }
+    }
+
+
+6-4 窗口售票 (10 分)
+线程同步，售票系统，4个窗口售票，不允许重票、错票。
+
+函数接口定义：
+在这里描述函数接口。例如：
+class SellThread implements Runnable
+在这里解释接口参数。例如：其中 N 和 D 都是用户传入的参数。 N 的值不超过int的范围； D 是[0, 9]区间内的个位数。函数须返回 N 中 D 出现的次数。
+
+裁判测试程序样例：
+public class Main {
+    public static void main(String args[]){
+        SellThread st=new SellThread();
+        new Thread(st).start();
+        new Thread(st).start();
+        new Thread(st).start();
+        new Thread(st).start();
+    }
+}
+
+class SellThread implements Runnable{
+    //略
+}
+
+class SellThread implements Runnable{
+    private int tickets = 10;
+    public synchronized void run() {
+        while (tickets > 0) {
+            System.out.println("sell tickets: " + this.tickets);
+            this.tickets--;
+        }
+    }
+}
+
+6-5 多线程输出递增数字 (10 分)
+启动3个线程打印递增的数字, 线程1先打印1,2,3,4,5, 然后是线程2打印6,7,8,9,10, 然后是线程3打印11,12,13,14,15. 接着再由线程1打印16,17,18,19,20….以此类推, 直到打印到15. 
+
+函数接口定义：
+在这里描述函数接口。例如：
+class PrintRunnable implements Runnable
+在这里解释接口参数。例如：其中 N 和 D 都是用户传入的参数。 N 的值不超过int的范围； D 是[0, 9]区间内的个位数。函数须返回 N 中 D 出现的次数。
+
+裁判测试程序样例：
+在这里给出函数被调用进行测试的例子。例如：
+//在这里写上你的函数
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Object o = new Object();
+        new Thread(new PrintRunnable(1,o)).start();
+        new Thread(new PrintRunnable(2,o)).start();
+        new Thread(new PrintRunnable(3,o)).start();
+    }
+}
+
+class PrintRunnable implements Runnable{
+    private final Object o;
+    private int threadId;
+    private static volatile int num = 1;
+
+    PrintRunnable(int threadId,Object o){
+        this.o = o;
+        this.threadId = threadId;
+    }
+
+    @Override
+    public void run() {
+        while(num<15){
+            synchronized (o){
+                if(num/5%3 + 1 != threadId){ // 判断是否等待
+                    try {
+                        o.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                for(int i=0; i<5; i++, num++){
+                    if(num>15) // 程序出口，在while中判断不太行
+                        break;
+                    System.out.println("线程"+threadId+":"+num);
+                }
+                o.notifyAll();
+
+            }
+        }
+    }
+}
+
+6-6 利用StringBuffer倒序输出 (10 分)
+利用StringBuffer倒序输出
+
+函数接口定义：
+在这里描述函数接口。例如：
+private static  String reorder(String str)
+str为需处理字符串
+
+裁判测试程序样例：
+import java.util.*;
+public class Main {
+
+    private String reorder(String str){
+        /* 略*/
+    }
+
+    public static void main(String[] args) {
+         Scanner sc = new Scanner(System.in);
+        System.out.println(reorder(sc.nextLine()));
+    }
+}
+
+private static String reorder(String str){
+        StringBuffer s = new StringBuffer(str);
+        return s.reverse().toString();
+}
+
+6-7 快乐递归 (10 分)
+用递归求N!=N*(N-1)(N-2)...21
+
+函数接口定义：
+public static long factorial1(int n)
+在这里解释接口参数。例如：其中 N 和 D 都是用户传入的参数。 N 的值不超过int的范围； D 是[0, 9]区间内的个位数。函数须返回 N 中 D 出现的次数。
+
+裁判测试程序样例：
+import java.util.*;
+public class Main{
+    public static long factorial1(int n){
+        /* 略 */
+    }
+    public static void main(String[] args){
+        Scanner sr = new Scanner(System.in);
+        int n = sr.nextInt();
+        //通过递归
+        long fact1 = factorial1(n);
+        System.out.printf("%d!=%d",n,fact1);
+    }
+}
+
+public static long factorial1(int n){
+    if (n == 1) {
+        return 1;
+    } else {
+        return n*factorial1(n-1);
+    }
+}
+
+6-8 两个method (10 分)
+使用java定义两个method方法，一个输出name---id另一个输出id---name一个参数有float一个参数有int。
+
+函数接口定义：
+在这里描述函数接口。例如：
+public static void method(······略) 
+裁判测试程序样例：
+在这里给出函数被调用进行测试的例子。例如：
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args) 
+    {
+        Scanner x = new Scanner(System.in);
+        float id1 = Float.valueOf(x.nextLine());
+        int id2 = (int) id1;
+        String name = x.nextLine();
+        method(name, id1);
+        method(name, id2);
+    }
+    public static void method(······略) {
+        /* 略*/
+    public static void method(······略) {
+        /* 略*/
+    }
+
+}
+
+    public static void method(String name, float id1) {
+        System.out.println(name + "---" + id1);
+    }
+    public static void method(String name, int id2) {
+        System.out.println(id2 + "---" + name);
+    }
+
+    6-9 给定一种规律 pattern 和一个字符串 str ，判断 str 是否遵循相同的规律 (10 分)
+给定一种规律 pattern 和一个字符串 str ，判断 str 是否遵循相同的规律。字符串str符合pattern定义的规律输出true，字符串str不符合pattern定义的规律输出false.
+
+这里的遵循指完全匹配，例如， pattern 里的每个字母和字符串 str 中的每个非空单词之间存在着双向连接的对应规律。
+
+示例1:
+
+输入: pattern = "abba", str = "dog cat cat dog" 输出: true 示例 2:
+
+输入:pattern = "abba", str = "dog cat cat fish" 输出: false 示例 3:
+
+输入: pattern = "aaaa", str = "dog cat cat dog" 输出: false
+
+函数接口定义：
+在这里描述函数接口。例如：
+public static boolean wordPattern(String pattern, String str);
+在这里解释接口参数： 其中 pattern 和 str 都是用户传入的参数。pattern 代表规律模式； str 是输入字符串。函数须返回一个布尔值，字符串str符合pattern定义的规律输出true，字符串str不符合pattern定义的规律输出false.。
+
+裁判测试程序样例：
+import java.util.HashMap;
+import java.util.Scanner;
+class Main{
+    public static void main(String  [] args) {
+        Scanner sc=new Scanner(System.in);
+        String str=sc.nextLine();
+        String pattern=sc.nextLine();
+        System.out.println(wordPattern(pattern,str));
+        }
+     public static boolean wordPattern(String pattern, String str){
+         /* 略*/
+    }
+
+    public static boolean wordPattern(String pattern, String str) {
+    String[] s = str.split(" ");
+        if (pattern.length() != s.length) {
+            return false;
+    }
+    String[] p = pattern.split(" ");
+    HashMap map1 = new HashMap();;
+    for(Integer i = 0; i < p.length; i++) {
+        if(map1.put(p[i], i) != map1.put(s[i], i)) {
+            return false;
+        }
+    }
+    return true;
+}
