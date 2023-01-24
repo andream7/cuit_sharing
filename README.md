@@ -54,7 +54,7 @@
 
   如果课程没有对应文件夹：在Issues提出，等待处理建立新文件夹后，就可以上传文件。建议使用方法一自行增加文件夹
 
-- 参与共享列表：
+- 参与共享列表：（排名不分先后）
 
   - andream7
   - pjx206
@@ -64,5 +64,9 @@
   - msojocs
   - CurryWOE
   - Sioncovy
-  - Xorex
+  - Administrator-Xorex
+  - CUITTools
+  - SaraiNoQ
+  - zRains
+  - xxr0ss
 
