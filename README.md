@@ -1,4 +1,15 @@
-# cuit_sharing
+<div align="center">
+  <h2>成都信息工程大学课程共享计划</h3>
+
+  <img style="display: inline-block;" src="https://img.shields.io/github/watchers/andream7/cuit_sharing" alt="GitHub watchers" />
+  <a href="https://github.com/andream7/cuit_sharing/stargazers"><img style="display: inline-block;" src="https://img.shields.io/github/stars/andream7/cuit_sharing" alt="GitHub stars" /></a>
+  <a href="https://github.com/andream7/cuit_sharing/network"><img style="display: inline-block;" src="https://img.shields.io/github/forks/andream7/cuit_sharing" alt="GitHub forks" /></a>
+  <a href="https://github.com/andream7/cuit_sharing/issues"><img style="display: inline-block;" src="https://img.shields.io/github/issues/andream7/cuit_sharing" alt="GitHub issues" /></a>
+  <a href="https://github.com/andream7/cuit_sharing/pulls"><img style="display: inline-block;" src="https://img.shields.io/github/issues-pr-closed-raw/andream7/cuit_sharing" alt="GitHub closed pull requests" /></a>
+  <img style="display: inline-block;" src="https://img.shields.io/github/contributors/andream7/cuit_sharing" alt="GitHub contributors" />
+  <a href="https://github.com/andream7/cuit_sharing/blob/main/LICENSE"><img style="display: inline-block;" src="https://img.shields.io/github/license/andream7/cuit_sharing" alt="GitHub license" /></a>
+  <img style="display: inline-block;" src="https://img.shields.io/github/repo-size/andream7/cuit_sharing" alt="GitHub repo size" />
+</div>
 
 声明：本仓库不鼓励任何抄袭行为，只是提供信息共享平台，旨在帮助复习以减少挂科概率。
 
