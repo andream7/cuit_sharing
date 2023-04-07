@@ -11,6 +11,7 @@
   <img style="display: inline-block;" src="https://img.shields.io/github/repo-size/andream7/cuit_sharing" alt="GitHub repo size" />
 </div>
 
+<br>
 声明：本仓库不鼓励任何抄袭行为，只是提供信息共享平台，旨在帮助复习以减少挂科概率。
 
 ##  特性
