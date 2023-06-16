@@ -63,7 +63,8 @@ git clone https://github.com/andream7/cuit_sharing.git
 - 上传文件到已有文件夹：打开对应文件夹，点击绿色Download按钮旁的upload，上传你的文件。
 
 - 上传文件到新文件夹：打开任意文件夹，点击绿色Download按钮旁的upload，把浏览器地址栏中文件夹名称改为你想要新建的文件夹名称，然后回车，上传你的文件。
-  
+
+- 如果你不会或者不想自己上传资料，也可以发送资料至邮箱a3481640032@outlook.com由我代为上传。
 
 ### 2. 下载到本地用git命令上传
 
