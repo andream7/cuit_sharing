@@ -1,0 +1,2 @@
+<?php
+$test = 'photo.jpg';

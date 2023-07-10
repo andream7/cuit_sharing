@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>留言上传</title>
+    <style>
+        p {
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+<form action="post_message.php" method="POST" enctype="multipart/form-data">
+    <div style="color: #4CAF50;width: 50%;margin: 0 auto;">
+        <p>请输入作者ID</p>
+        <br>
+        <input type="text" name="author_id" placeholder="作者ID" style="width: 100%">
+        <br>
+        <p>请输入主题</p>
+        <br>
+        <input type="text" name="title" placeholder="主题">
+        <br>
+        <p>请输入正文</p>
+        <br>
+        <textarea name="content" rows="10" cols="30" placeholder="正文"></textarea>
+        <br>
+        <p>请上传图片</p>
+        <input type="file" name="image" id="image">
+        <br>
+        <input type="submit" value="上传">
+    </div>
+</form>
+</body>
+</html>
