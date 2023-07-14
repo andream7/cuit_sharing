@@ -1,0 +1,83 @@
+.login-box {
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+}
+
+.login-box h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+.textbox {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.textbox input {
+    border: none;
+    outline: none;
+    background: #272727;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    background: #87CEFA;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.captcha-box {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.captcha-box img {
+    margin-right: 10px;
+}
+
+.captcha-box input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    background: #272727;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.captcha-box button {
+    border: none;
+    outline: none;
+    background: #87CEFA;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+.captcha-box button:hover {
+    background: #00BFFF;
+}

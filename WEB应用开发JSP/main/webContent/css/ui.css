@@ -1,0 +1,50 @@
+@media screen and (min-width: 992px) {
+    .the-icons li {
+        width: 12.5%;
+    }
+}
+
+.the-buttons > li {
+    float: left;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    line-height: 1.25;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 -1px -1px 0;
+}
+
+.the-icons .glyphicon {
+    display: block;
+    margin: 5px auto;
+    vertical-align: middle;
+    margin-right: 3px;
+    font-size: 24px;
+}
+
+.the-icons li {
+    float: left;
+    width: 100px;
+    height: 110px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    line-height: 1.25;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.the-icons, .the-buttons {
+    list-style: none;
+}
+
+.the-icons .glyphicon {
+    display: inline;
+}

@@ -1,0 +1,45 @@
+<
+%
+=
+basePath
+
+%
+> body {
+    font-family: Microsoft YaHei, '����', Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    font-size: 16px;
+    line-height: 1.72857143;
+    color: #333;
+    background-color: #fff;
+}
+
+.navbar-static-top {
+    margin-bottom: 20px;
+}
+
+i {
+    font-size: 18px;
+}
+
+footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #efefef;
+}
+
+.nav > li .count {
+    position: absolute;
+    bottom: 12px;
+    right: 8px;
+    font-size: 10px;
+    font-weight: normal;
+    background: rgba(51, 200, 51, 0.55);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1em;
+    padding: 2px 4px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+}
