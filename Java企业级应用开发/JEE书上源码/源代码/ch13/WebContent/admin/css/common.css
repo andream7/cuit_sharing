@@ -1,0 +1,18 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0px auto;
+	background-image: url(../images/bb.jpg)
+}
+a {
+	color: #000000;
+	text-decoration: none; 
+}
+a:hover {
+	background-color: #006633; 
+	color: #FFFFFF;
+}

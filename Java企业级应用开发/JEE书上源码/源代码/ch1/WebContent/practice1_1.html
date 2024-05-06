@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>调查问卷</h2>
+	<form action="" method="post" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<td>姓名</td>
+			<td><input type="text" name="name" value=""></td>
+		</tr>
+		<tr>
+			<td>性别</td>
+			<td>
+				<input type="radio" value="male" name="sex" checked/>男
+				<input type="radio" value="female" name="sex" />女
+			</td>
+		</tr>
+		<tr>
+			<td>所在地</td>
+			<td>
+				<select name="address">
+					<option value="libiya" selected>利比亚
+					<option value="xuliya" >叙利亚
+					<option value="yilang" >伊朗
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>喜欢的歌手</td>
+			<td>
+				<input type="checkbox" value="zhangsan" name="lover" checked/>张三
+				<input type="checkbox" value="lisi" name="lover" checked/>李四
+				<input type="checkbox" value="wangwu" name="lover" />王五
+				<input type="checkbox" value="dalianyige" name="lover" />大连一哥
+			</td>
+		</tr>
+		<tr>
+			<td>你的靓照</td>
+			<td><input type="file" name="pictrue"/></td>
+		</tr>
+		<tr>
+			<td>个人描述</td>
+			<td><textarea name="miaoshu" cols="20" rows="10"></textarea></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="提交" name="submit"/></td>
+			<td><input type="reset" value="重置" name="reset"/></td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>

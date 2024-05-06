@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>  
+	<package name="hello" namespace="/hello" extends="struts-default">
+		<action name="world" class="action.HelloWorldAction">
+			<result  name="success">/hello.jsp</result>
+		</action>
+	</package>
+	<package name="test" namespace="/test" extends="struts-default">
+		<action name="input" class="action.ReceiveAction">
+			<result>/hello.jsp</result>
+		</action>
+		
+		<action name="yourLogin" class="action.YourLoginAction">
+			<result>/yourLoginSuccess.jsp</result>
+			<result name="fail">/yourLoginFail.jsp</result>
+		</action>
+		
+	</package>
+</struts>    

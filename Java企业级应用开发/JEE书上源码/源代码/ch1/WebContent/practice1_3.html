@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>practice1_3.html</title>
+<script type="text/javascript">
+//去掉前后空格
+function deltrim(x){
+	while(x.length>0 && x.charAt(0)==' ')
+	 	x = x.substring(1,x.length);
+	while(x.length>0&&x.charAt(x.length-1)==' ')
+		x = x.substring(0,x.length-1);
+	return x;
+}
+//非空验证
+function isNull(elem,message){
+	var va=deltrim(elem.value);
+	if(va==""){
+		alert(message);
+		elem.focus();
+		return false;
+	}
+	return true;
+}
+//验证账号
+function validateId(){
+	var first=document.forms[0].id.value.charAt(0);
+	var exp=/^[a-z0-9]+$/;
+	if(isNull(document.forms[0].id,"请输入账号")){//验证非空
+		//验证首字符
+		if(first>='a'&&first<='z'||first>='A'&&first<='Z'){
+		}
+		else{
+			alert("账号首字符必须是字母！");
+			document.forms[0].id.focus();
+			return false;
+		}
+		if(!exp.test(document.forms[0].id.value)){
+			alert("账号必须是字母或数字！");
+			document.forms[0].id.focus();
+			return false;
+		}
+		return true;
+	}else{
+		return false;
+	}
+}
+//验证密码
+function validatepwd(){
+	var exp=/^[a-z0-9]+$/;
+	if(isNull(document.forms[0].pwd,"请输入密码")){//验证非空
+		if(document.forms[0].pwd.value.length<=8){
+			alert("密码大于8位");
+			document.forms[0].pwd.focus();
+			return false;
+		}else{
+			if(exp.test(document.forms[0].pwd.value)){
+				alert("密码需要有字母和数字之外的字符!");
+				document.forms[0].pwd.focus();
+				return false;
+			}
+		}
+	}else{
+		return false;
+	}
+	if(document.forms[0].pwd.value!=document.forms[0].repwd.value){
+		alert("两次密码不一样!");
+		document.forms[0].pwd.focus();
+		return false;
+	}
+	return true;
+}
+//验证邮编
+function checkecode(){
+	var exp=/^[0-9]+$/;
+	if(isNull(document.forms[0].ecode,"请输入邮编")){//验证非空
+		if(document.forms[0].ecode.value.length!=6){
+			alert("邮编6位");
+			document.forms[0].ecode.focus();
+			return false;
+		}else{
+			if(!exp.test(document.forms[0].ecode.value)){
+				alert("邮编为数字");
+				document.forms[0].ecode.focus();
+				return false;
+			}
+		}
+		return true;
+	}else{
+		return false;
+	}
+}
+//验证Email
+function checkEmail(){
+	var exp=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+	if(isNull(document.forms[0].email,"请输入Email")){//验证非空
+		if(!exp.test(document.forms[0].email.value)){
+			alert("Email格式错误！");
+			document.forms[0].email.focus();
+			return false;
+		}
+		return true;
+	}else{
+		return false;
+	}
+}
+//验证身份证
+function checkIdenty(){
+	var bir=document.forms[0].birthday.value;
+	var ide=document.forms[0].identy.value;
+	var biride=ide.substring(6,10)+"-"+ide.substring(10,12)+"-"+ide.substring(12,14);
+	if(isNull(document.forms[0].identy,"请输入身份证")){//验证非空
+		if(ide.length!=18){
+			alert("身份证18位");
+			document.forms[0].identy.focus();
+			return false;
+		}else{
+			if(bir!=biride){
+				alert("身份证输入和生日不符合！");
+				document.forms[0].identy.focus();
+				return false;
+			}
+		}
+		return true;
+	}else{
+		return false;
+	}
+}
+//提交按钮
+function gogo(){
+	if(validateId()&&validatepwd()&&checkIdenty()&&checkecode()&&checkEmail()){
+		document.forms[0].submit();
+		return true;
+	}
+	return false;
+}
+</script>
+</head>
+<body>
+	<form action="">
+		<table>
+			<tr>
+				<td>登录账号</td>
+				<td><input type="text" name="id" />
+				</td>
+			</tr>
+			<tr>
+				<td>密码</td>
+				<td><input type="password" name="pwd" />
+				</td>
+			</tr>
+			<tr>
+				<td>确认密码</td>
+				<td><input type="password" name="repwd" />
+				</td>
+			</tr>
+			<tr>
+				<td>姓名</td>
+				<td><input type="text" name="name" />
+				</td>
+			</tr>
+			<tr>
+				<td>身份证号码</td>
+				<td><input type="text" name="identy" />
+				</td>
+			</tr>
+			<tr>
+				<td>出生年月日</td>
+				<td><input type="text" name="birthday"/>
+				</td>
+			</tr>
+			<tr>
+				<td>住址</td>
+				<td><input type="text" name="address" />
+				</td>
+			</tr>
+			<tr>
+				<td>邮编</td>
+				<td><input type="text" name="ecode" />
+				</td>
+			</tr>
+			<tr>
+				<td>Mail</td>
+				<td><input type="text" name="email" />
+				</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="提交" onclick="return gogo()" />
+				</td>
+				<td><input type="reset" name="重置" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

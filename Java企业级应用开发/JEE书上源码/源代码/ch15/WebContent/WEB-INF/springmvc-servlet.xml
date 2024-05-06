@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans 
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+         http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd"> 
+    <!-- 使用扫描机制，扫描控制器类 -->
+    <context:component-scan base-package="controller"/> 
+    <context:component-scan base-package="service"/> 
+    <context:component-scan base-package="dao"/> 
+    <mvc:annotation-driven />
+    <!-- 使用resources过滤掉不需要dispatcher servlet的资源（即静态资源，如css、js、html、images）。
+    使用resources时，必须使用annotation-driven，不然resources元素会阻止任意控制器被调用。
+    -->  
+    <!-- 允许css目录下所有文件可见 -->
+    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>            	
+  	<!-- 配置视图解析器 -->
+  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+            id="internalResourceViewResolver">
+       <!-- 前缀 -->
+       <property name="prefix" value="/WEB-INF/jsp/" />
+       <!-- 后缀 -->
+       <property name="suffix" value=".jsp" />
+  </bean>
+  <!-- 配置数据源 -->
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+   		<!-- MySQL数据库驱动 -->
+   		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+   		<!-- 连接数据库的URL -->
+   		<property name="url" value="jdbc:mysql://localhost:3306/test?characterEncoding=utf8"/>
+   		<!-- 连接数据库的用户名 -->
+   		<property name="username" value="root"/>
+   		<!-- 连接数据库的密码 -->
+   		<property name="password" value="root"/>
+   </bean>
+   <!-- 配置JDBC模板 -->
+   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+   		<property name="dataSource" ref="dataSource"/>
+   </bean>
+    <!-- 为数据源添加事务管理器 -->
+   <bean id="txManager"   
+	     class="org.springframework.jdbc.datasource.DataSourceTransactionManager">   
+	     <property name="dataSource" ref="dataSource" />   
+   </bean> 
+   <!-- 为事务管理器注册注解驱动 -->
+   <tx:annotation-driven transaction-manager="txManager" />
+</beans>

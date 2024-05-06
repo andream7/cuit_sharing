@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>  
+	<package name="user" namespace="/user" extends="struts-default">
+		<global-results>
+			<!-- 全局转发，程序出错时，也可使用全局异常 -->
+			<result name="error">/error.jsp</result>
+		</global-results>
+		<action name="regist" class="action.UserAction" method="register">
+			<result name="register">/register.jsp</result>
+			<result>/login.jsp</result>
+		</action>
+		<action name="login" class="action.UserAction" method="login">
+			<result name="loginFail">/login.jsp</result>
+			<result type="redirect">getAllUser.action</result>
+		</action>
+		<action name="getAllUser" class="action.UserAction" method="getAllUser">
+			<result>/main.jsp</result>
+		</action>
+	</package>
+	<!-- package extends为json-default，
+	只有在json-default包中使用result的 type为 json。result类型需显示指明为json，
+	result标签内，无需指明视图指向的界面。 -->
+	 <package name="jsontest" extends="json-default" namespace="/jsontest">
+	 	<action name="isUse" class="action.UserAction" method="isUse">
+			<result name="success" type="json">
+				<!-- 返回的json对象的属性isResult -->
+				<param name="includeProperties">isResult</param>
+			</result>
+        </action>
+	 </package>
+</struts>    

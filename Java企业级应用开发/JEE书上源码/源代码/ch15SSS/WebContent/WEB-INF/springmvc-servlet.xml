@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans 
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">                 
+    <!-- 附加props配置文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	
+    <!-- scan the package and the sub package -->
+    <context:component-scan base-package="com.controller"/> 
+    <context:component-scan base-package="com.service"/> 
+    <context:component-scan base-package="com.dao"/>
+    <mvc:annotation-driven />
+    <!-- 静态资源需要单独处理，不需要dispatcher servlet -->  
+    <mvc:resources location="/images/" mapping="/images/**"></mvc:resources> 
+    <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+    <!-- 配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+            id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp" />
+    </bean>
+     <bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<!-- 读取classpath:db.properties属性文件 -->
+	</bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+     	<property name="dataSource" ref="dataSource"/>  
+   </bean>  
+   <!-- 添加事务支持 -->
+   <bean id="txManager"   
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">   
+        <property name="dataSource" ref="dataSource" />   
+    </bean>  
+	<!-- 注册事务注解处理器-->
+	<tx:annotation-driven transaction-manager="txManager" />
+</beans>

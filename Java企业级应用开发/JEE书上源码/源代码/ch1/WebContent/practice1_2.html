@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0px auto;
+	height: auto;
+	width: 800px;
+	border: 1px solid #006633;
+}
+#header {
+	height: 100px;
+	width: 800px;
+	background-image: url(plane.jpg);
+	background-repeat: no-repeat;
+	margin: 0px 0px 3px 0px;
+}
+#navigator { /*定义一个导航栏的长盒子*/
+	height: 25px;
+	width: 800px;
+	font-size: 14px;
+	list-style-type: none; /*让nav这个大盒子下面的小盒子LI列表样式不显示,这对于标准浏览器很重要*/
+}
+
+#navigator li {
+	float: left; /*让LI这些小盒子左对齐*/
+}
+
+#navigator li a {
+	color: #000000;
+	text-decoration: none; /*让LI盒子里面的链接样式没有下滑线*/
+	padding-top: 4px;
+	display: block; /*让LI里面的链接块状呈现，就像一个按钮，而不必一定要点中链接文字才起作用*/
+	width: 131px;
+	height: 22px;
+	text-align: center;
+	background-color: #009966;
+	margin-left: 2px;
+}
+
+#navigator li a:hover {
+	background-color: #006633; /*鼠标移到链接盒子上面改变盒子背景色*/
+	color: #FFFFFF;
+}
+#content {
+	height: auto;
+	width: 780px;
+	line-height: 1.5em;
+	padding: 10px;
+}
+
+#content p {
+	text-indent: 2em;
+}
+
+#content h3 {
+	font-size: 16px;
+	margin: 10px;
+}
+#footer {
+	height: 50px;
+	width: 780px;
+	line-height: 2em;
+	text-align: center;
+	background-color: #009966;
+	padding: 10px;
+}
+* {
+		margin: 0px;
+		padding: 0px;
+}
+
+</style>
+</head>
+<body>
+<body>
+	<div id="header"></div>
+	<div id="navigator">
+		<ul id="navigator">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">文章</a></li>
+			<li><a href="#">相册</a></li>
+			<li><a href="#">Blog</a></li>
+			<li><a href="#">论坛</a></li>
+			<li><a href="#">帮助</a></li>
+		</ul>
+	</div>
+	<div id="content">
+		<h3>前言</h3>
+		<p>CSS是英文Cascading Style Sheet的缩写，又称为“层叠样式表”，简称为样式表。它是W3C定义的标准，一种用来为结构化文档（如HTML文档）添加样式（字体、间距和背景等）的计算机语言。</p>
+		<h3>理解DIV+CSS布局</h3>
+		<p>简单地说DIV+CSS(DIV CSS)被称为“WEB标准”中常用术语之一。首先认识DIV是用于搭建html网页结构（框架）标签，再认识CSS是用于创建网页表现（样式/美化）样式表统称，通过css来设置div标签样式，这一切常常我们称之为div+css。
+		</p>
+	</div>
+	<div id="footer">
+		<p>关于| 广告服务| 招聘| 客服中心| Q Q留言| 网站管理| 会员登录| 购物车</p>
+		<p>Copyright ©清华大学出版社</p>
+	</div>
+</body>
+
+</body>
+</html>

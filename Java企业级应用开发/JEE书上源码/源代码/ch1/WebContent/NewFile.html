@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>正则表达的应用</title>
+<script type="text/javascript">
+//验证Email
+function checkEmail(){
+	var exp=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+	if(!exp.test(document.forms[0].email.value)){
+		alert("Email格式错误！");
+		document.forms[0].email.focus();
+		return false;
+	}else{
+		alert("Email格式正确！");
+		return true;
+	}
+}
+</script>
+</head>
+<body>
+	<form action="">
+		Mail：<input type="text" name="email" /><br>
+		<input type="button" value="提交" onclick="return checkEmail()" />
+	</form>
+</body>
+</html>
