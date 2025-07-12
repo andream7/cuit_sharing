@@ -1,6 +1,7 @@
 <img width="3332" height="10313" alt="0-区块链系统设计与开发-课程介绍" src="https://github.com/user-attachments/assets/e4f2c72f-cf25-4e48-9cbf-d5a2ac6c6310" />
 
 # **LevelDB**
+
 <img width="3332" height="313" alt="屏幕截图_12-7-2025_223318_" src="https://github.com/user-attachments/assets/ac406bbc-f368-4c72-9d29-e49034b9aeb9" />
 
 LevelDB 是⼀种⾼性能的键值存储数据库，由Google开发，其核⼼原理主要包括以下⼏个⽅⾯：
@@ -90,7 +91,8 @@ Hash函数是一个公开的函数，可以将==任意==长度的消息m映射�
 
 ## MT
 
-![[Pasted image 20250623231324.png]]
+<img width="1146" height="319" alt="屏幕截图 2025-07-05 153701" src="https://github.com/user-attachments/assets/d0fc116a-4d8e-464c-94b4-d3fad2218963" />
+
 
 **Merkle Tree 是一种树，大多数是二叉树，也可以是多叉树。无论是几叉树，它都具有树结构的所有特点：**
 
@@ -124,7 +126,7 @@ Merkle DAG 在功能上与 Merkle Tree 有很大不同，上面我们提到 ==Me
 **时复和空复：**
 树有 `n` 个叶子节点时，总节点数为 `2n-1`近似 `O(n)`    `n` 为节点数，`e` 为边数。
 
-![[Pasted image 20250623231836.png]]
+<img width="636" height="332" alt="屏幕截图 2025-06-23 231835" src="https://github.com/user-attachments/assets/37841ec0-e5da-44bb-8088-82973757269f" />
 
 ## 字典树
 Trie (/ˈtraɪ/, /ˈtriː/)，又称字典树、前缀树，是一种树形结构，用于高效地存储和检索字符串数据集。
@@ -208,7 +210,16 @@ Trie (/ˈtraɪ/, /ˈtriː/)，又称字典树、前缀树，是一种树形结�
 •Radix Tree: 压缩方式可能更加灵活，例如允许存在一些只有一个子节点的节点，或者使用不同的压缩策略。
 
 ### 分支，叶子，扩展节点的定义
-![[Pasted image 20250624120400.png]]
+分支节点
+当两个key开始不同时，分支节点充当一种路标。要做到这一点，节点为半字节可以接受的每个值都有一个插槽。根据key的下一个字符，插槽中存在对子节点的引用。
+
+叶节点
+叶节点是该数据结构中最低的节点，其特点是没有子节点。它形成key的结尾并包含相应的值。
+
+扩展节点
+当多个key具有相等的部分时，将使用扩展节点。
+<img width="3720" height="525" alt="image" src="https://github.com/user-attachments/assets/dda18269-5662-4936-9a67-75b68fd84d80" />
+
 ![[Pasted image 20250624123612.png]]
 
 ### 分支，叶子，扩展节点的上下节点
@@ -244,7 +255,7 @@ type Extension struct {
 
 ## Verify&Recover
 
-![[Pasted image 20250624211600.png]]
+<img width="1067" height="447" alt="屏幕截图 2025-06-24 211558" src="https://github.com/user-attachments/assets/ed9f70fd-7f1b-42e1-a40e-172925a7e45b" />
 
 ## Trie 或 MPT 中的 Hex 字符路径
 在以十六进制字符构成的树结构中，“Hex 字符路径” 是指每个路径节点使用 `[0-9a-f]` 字符来索引的路径
