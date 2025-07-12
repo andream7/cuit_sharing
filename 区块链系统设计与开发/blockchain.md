@@ -91,8 +91,7 @@ Hash函数是一个公开的函数，可以将==任意==长度的消息m映射�
 
 ## MT
 
-<img width="1146" height="319" alt="屏幕截图 2025-07-05 153701" src="https://github.com/user-attachments/assets/d0fc116a-4d8e-464c-94b4-d3fad2218963" />
-
+<img width="1266" height="548" alt="屏幕截图 2025-06-23 231323" src="https://github.com/user-attachments/assets/f0195300-f8de-432e-b562-d93c4235e2a2" />
 
 **Merkle Tree 是一种树，大多数是二叉树，也可以是多叉树。无论是几叉树，它都具有树结构的所有特点：**
 
@@ -218,9 +217,8 @@ Trie (/ˈtraɪ/, /ˈtriː/)，又称字典树、前缀树，是一种树形结�
 
 扩展节点
 当多个key具有相等的部分时，将使用扩展节点。
-<img width="3720" height="525" alt="image" src="https://github.com/user-attachments/assets/dda18269-5662-4936-9a67-75b68fd84d80" />
 
-![[Pasted image 20250624123612.png]]
+<img width="901" height="1130" alt="image" src="https://github.com/user-attachments/assets/53f5c540-75b2-46d9-b03d-dc10094f458a" />
 
 ### 分支，叶子，扩展节点的上下节点
 
