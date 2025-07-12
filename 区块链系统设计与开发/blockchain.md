@@ -1,7 +1,8 @@
-![[e6da17b4994354f2adbb5eaf79f40280.png]]
+<img width="3332" height="10313" alt="0-区块链系统设计与开发-课程介绍" src="https://github.com/user-attachments/assets/e4f2c72f-cf25-4e48-9cbf-d5a2ac6c6310" />
 
 # **LevelDB**
 ![[Pasted image 20250623140236.png]]
+
 LevelDB 是⼀种⾼性能的键值存储数据库，由Google开发，其核⼼原理主要包括以下⼏个⽅⾯：
 
 ## 3.1 LSM-Tree 数据结构
