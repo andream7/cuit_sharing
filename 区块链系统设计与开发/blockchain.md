@@ -1,7 +1,7 @@
 <img width="3332" height="10313" alt="0-区块链系统设计与开发-课程介绍" src="https://github.com/user-attachments/assets/e4f2c72f-cf25-4e48-9cbf-d5a2ac6c6310" />
 
 # **LevelDB**
-<img width="3332" height="313" alt="屏幕截图_12-7-2025_223318_" src="https://github.com/user-attachments/assets/ac406bbc-f368-4c72-9d29-e49034b9aeb9)" />
+<img width="3332" height="313" alt="屏幕截图_12-7-2025_223318_" src="https://github.com/user-attachments/assets/ac406bbc-f368-4c72-9d29-e49034b9aeb9" />
 
 LevelDB 是⼀种⾼性能的键值存储数据库，由Google开发，其核⼼原理主要包括以下⼏个⽅⾯：
 
