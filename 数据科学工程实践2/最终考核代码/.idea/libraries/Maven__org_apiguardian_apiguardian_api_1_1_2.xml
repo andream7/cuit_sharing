@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apiguardian:apiguardian-api:1.1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

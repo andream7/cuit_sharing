@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>五子棋</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <div id="parameter-init">
+      <div class="game-title">五子棋 - 双人模式/人机模式</div>
+      <div class="checker-size">
+        <b>棋盘大小：</b>
+        <select name="size" id="size" class="selection">
+          <option value="15">15*15 标准</option>
+        </select>
+      </div>
+      <div class="game-mode">
+        <b>游戏模式：</b>
+        <select name="mode" id="mode" class="selection">
+          <option value="person2person">玩家对战</option>
+          <option value="machine2person">人机对战</option>
+        </select>
+      </div>
+      <button id="confirm-begin">确&nbsp;认</button>
+    </div>
+
+    <div id="person2person" class="active">
+      <div class="hint">
+        <div id="current-role"></div>
+        <div id="result-msg"></div>
+      </div>
+      <canvas id="checkerboard"></canvas>
+    </div>
+  </body>
+
+  <script src="js/index.js"></script>
+</html>

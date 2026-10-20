@@ -1,0 +1,32 @@
+[
+    {
+        "caretX": 1,
+        "caretY": 30,
+        "filename": "C:/Users/admin/Desktop/学校给鼠鼠的作业/c语言工程实践-五子棋/五子棋/main.h",
+        "focused": true,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 0,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 17,
+        "filename": "C:/Users/admin/Desktop/学校给鼠鼠的作业/c语言工程实践-五子棋/五子棋/main.c",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 2,
+        "topLine": 19
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "C:/Users/admin/Desktop/学校给鼠鼠的作业/c语言工程实践-五子棋/五子棋/game.c",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 1,
+        "topLine": 1
+    }
+]

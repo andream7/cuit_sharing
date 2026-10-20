@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: ch.qos.reload4j:reload4j:1.2.19">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/ch/qos/reload4j/reload4j/1.2.19/reload4j-1.2.19.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/ch/qos/reload4j/reload4j/1.2.19/reload4j-1.2.19-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/ch/qos/reload4j/reload4j/1.2.19/reload4j-1.2.19-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:2.6.13">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/springframework/boot/spring-boot-test-autoconfigure/2.6.13/spring-boot-test-autoconfigure-2.6.13.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/springframework/boot/spring-boot-test-autoconfigure/2.6.13/spring-boot-test-autoconfigure-2.6.13-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/springframework/boot/spring-boot-test-autoconfigure/2.6.13/spring-boot-test-autoconfigure-2.6.13-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

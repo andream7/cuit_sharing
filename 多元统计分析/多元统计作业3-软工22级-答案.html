@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>多元统计作业3-软工20级</title>
+  <style>.paper {
+  margin: 0;
+  font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  color: var(--text-normal, hsl(0, 0%, 25%));
+}
+.paper *,
+.paper *::before,
+.paper *::after {
+  box-sizing: border-box;
+}
+.paper pre,
+.paper code,
+.paper kbd,
+.paper samp {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  font-size: 12px;
+}
+.paper pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow: auto;
+  -ms-overflow-style: scrollbar;
+}
+.paper label {
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+.paper hr {
+  height: 0;
+  border: 0;
+  border-top: 1px solid var(--scroll-thumb, hsl(0, 0%, 85%));
+  margin: 0;
+}
+.paper .result table {
+  width: 100%;
+}
+.paper .result th,
+.paper .result td {
+  border: 1px solid var(--border-all, hsla(0, 0%, 0%, 0.06));
+  text-align: center;
+}
+.paper .result .box {
+  border: 1px solid var(--border-all, hsla(0, 0%, 0%, 0.06));
+  padding: 8px;
+  color: var(--text-normal, hsl(0, 0%, 25%));
+}
+/* stylelint-disable */
+.ques-view, .rendered-markdown {
+  line-height: 1.5;
+}
+.ques-view p, .rendered-markdown p {
+  margin: 0.5em 0;
+}
+.ques-view h1, .rendered-markdown h1, .ques-view h2, .rendered-markdown h2, .ques-view h3, .rendered-markdown h3, .ques-view h4, .rendered-markdown h4, .ques-view h5, .rendered-markdown h5, .ques-view h6, .rendered-markdown h6 {
+  margin: 0.8em 0;
+}
+.ques-view img, .rendered-markdown img {
+  max-width: 100%;
+}
+.ques-view .ques-list, .rendered-markdown .ques-list {
+  padding-left: 3.125rem;
+}
+.ques-view .ques-list li, .rendered-markdown .ques-list li {
+  position: relative;
+  list-style-type: upper-alpha;
+}
+.ques-view .ques-list input, .rendered-markdown .ques-list input {
+  position: absolute;
+  left: -2.5rem;
+  top: 50%;
+  margin-top: -0.4375rem;
+}
+.ques-view textarea, .rendered-markdown textarea {
+  border-radius: 0.125rem;
+  width: 100%;
+  padding: 0.625rem;
+  box-sizing: border-box;
+  min-height: 6.25rem;
+}
+.ques-view code, .rendered-markdown code {
+  font-size: 0.75rem;
+  background: var(--bg-light);
+  border-radius: 0.1875rem;
+  border: 1px solid var(--border-all);
+  color: #e74c3c;
+  margin: 0 0.125rem;
+}
+.ques-view pre, .rendered-markdown pre {
+  padding: 0.375rem 0.75rem;
+  background: var(--bg-light);
+  border: 1px solid var(--border-all);
+  border-radius: 0.1875rem;
+  word-break: break-all;
+}
+.ques-view pre code, .rendered-markdown pre code {
+  background: none;
+  border: none;
+  color: var(--text-normal);
+  margin: 0;
+}
+.ques-view hr, .rendered-markdown hr {
+  border: none;
+  border-top: 1px solid var(--border-all);
+}
+.ques-view blockquote, .rendered-markdown blockquote {
+  margin: 0.5em 0;
+  padding: 0.125rem 0.875rem;
+  font-size: 0.75rem;
+  background: var(--bg-light);
+  border-left: 4px solid var(--border-all);
+}
+.ques-view table, .rendered-markdown table {
+  margin: 0 auto;
+}
+.ques-view table th, .rendered-markdown table th, .ques-view table td, .rendered-markdown table td {
+  border: 1px solid var(--border-all);
+  padding: 0.125rem 0.25rem;
+  font-size: 0.75rem;
+}
+.ques-view .ques-score, .rendered-markdown .ques-score {
+  color: var(--text-light);
+  user-select: none;
+}
+.rendered-markdown blockquote {
+  margin: 0.5em 0;
+  padding: 0.125rem 0.875rem;
+  font-size: 0.75rem;
+  background: var(--bg-light);
+  border-left: 4px solid var(--border-all);
+}
+.rendered-markdown blockquote p {
+  margin-bottom: 0;
+}
+.rendered-markdown table td, .rendered-markdown table th {
+  border: 1px solid var(--border-all);
+  padding: 0.3125rem;
+}
+.rendered-markdown p:first-child {
+  margin: 0;
+}
+.katex-mathml {
+  display: none;
+}
+.code {
+  font-family: var(--font-mono);
+}
+</style>
+  <link rel="stylesheet" href="https://static.pintia.cn/assets/katex.min.css" crossorigin="anonymous">
+</head>
+<body>
+
+<div><div class="paper" style="max-width:940px;margin:auto" data-reactroot=""><div style="padding:16px;text-align:center;font-size:24px;font-weight:bold">多元统计作业3-软工20级</div><div style="width:calc(100% / 3);display:inline-flex;padding:4px"><span style="font-weight:bold;min-width:56px">开始时间</span><span style="margin-left:8px;overflow:hidden;text-overflow:ellipsis" title="2022/12/19 10:14:00">2022/12/19 10:14:00</span></div><div style="width:calc(100% / 3);display:inline-flex;padding:4px"><span style="font-weight:bold;min-width:56px">结束时间</span><span style="margin-left:8px;overflow:hidden;text-overflow:ellipsis" title="2023/01/06 23:59:00">2023/01/06 23:59:00</span></div><div style="width:calc(100% / 3);display:inline-flex;padding:4px"><span style="font-weight:bold;min-width:56px">答题时长</span><span style="margin-left:8px;overflow:hidden;text-overflow:ellipsis" title="26745分钟">26745分钟</span></div><div style="width:calc(100% / 3);display:inline-flex;padding:4px"><span style="font-weight:bold;min-width:56px">答卷类型</span><span style="margin-left:8px;overflow:hidden;text-overflow:ellipsis" title="标准答案">标准答案</span></div><div style="width:calc(100% / 3);display:inline-flex;padding:4px"><span style="font-weight:bold;min-width:56px">总分</span><span style="margin-left:8px;overflow:hidden;text-overflow:ellipsis" title="100">100</span></div><hr/><div style="display:flex;font-size:16px;margin-top:16px"><span style="flex-grow:1;font-weight:bold">判断题</span><span>得分：暂无</span><span style="margin-left:20px">总分：27</span></div><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-1</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>主成分分析时，对数据进行标准化的过程可能抹杀原始变量离散程度差异。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954560" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954560" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-2</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>主成分分析要求数据来自于正态总体。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954561" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954561" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-3</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>对来自多元正态总体的数据，主成分分析的主成分就是按数据离散程度最大的方向进行坐标轴旋转。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954562" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954562" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-4</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>在主成分分析的过程中，得到的各个主成分的方差依次递减。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954563" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954563" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-5</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>对于两组的判别，最大后验概率法的判别规则可使两个误判概率之和达到最小。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954564" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954564" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-6</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>对于两组皆为正态组及协差阵相同的情形下，两组先验概率相同及两个误判代价也相等时的贝叶斯判别等价于距离判别，也等价于费希尔判别。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954565" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954565" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-7</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>主成分分析实质上是线性变换，无假设检验。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954566" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954566" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-8</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>一般地说，从同一原始变量的协方差矩阵出发求得的主成分与从原始变量的相关矩阵出发求得的主成分相同。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954567" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954567" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-9</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>选取主成分还可根据特征值的变化来确定。<br>求解主成分的过程实际就是对矩阵结构进行分析的过程。（T）（1分）</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954568" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954568" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-10</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>对于度量单位不同的指标或是取值范围彼此差异非常大的指标，可直接从协方差矩阵出发进行主成分分析。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954569" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954569" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-11</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>主成分分析只是要达到目的的一个中间结果（或步骤），没有实际意义。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954570" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954570" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-12</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>选取主成分还可根据特征值的变化来确定。<br>求解主成分的过程实际就是对矩阵结构进行分析的过程。（T）（1分）</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954571" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954571" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-13</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>对于度量单位不同的指标或是取值范围彼此差异非常大的指标，可直接从协方差矩阵出发进行主成分分析。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954572" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954572" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-14</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>为了使得因子分析的结果更易于解释，进行正交因子旋转，旋转后，新的公共因子仍然彼此独立。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954573" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954573" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-15</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子得分是为了考察每一个样品性质之间的关系。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954574" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954574" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-16</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子分析中，载荷矩阵中的每一个元素代表的是变量Xi与公共因子Fj之间的关系。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954575" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954575" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-17</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子分析中，利用主成分法求解的载荷系数与主成分分析中的主成分线性方程的系数一样。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954576" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954576" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-18</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子分析中，公因子Fj的方差贡献表示的是公共因子Fj对于原始数据X中的每一分量Xi（i=1，2，…，p）所提供的方差的总和。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954577" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954577" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-19</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>利用主成分法得到的因子载荷是唯一的。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954578" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954578" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-20</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>主成分的数目大大少于原始变量的数目。  </p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954579" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954579" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-21</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>Logistic回归对于自变量有要求，度量变量或者非度量变量都不可以进行回归。  </p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954580" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954580" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-22</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子分析把变量分成公共因子和独立因子两部分因素。</p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954581" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954581" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-23</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子载荷经正交旋转后,各变量的共性方差和各因子的贡献都发生了变化。  </p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954582" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954582" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-24</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子分析只能用于研究变量之间的相关关系。  </p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954583" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954583" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-25</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>主成分分析是将原来较少的指标扩充为多个新的的综合指标的多元统计方法。  </p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954584" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954584" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-26</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>Logistic回归对于自变量有要求,度量变量或者非度量变量都不可以进行回归。  </p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954585" value="TRUE" disabled=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954585" value="FALSE" disabled="" checked=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">1-27</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子载荷量是指因子结构中原始变量在因子分析时抽取出的公共因子的相关程度。  </p>
+</div></div><div style="color:gray;word-break:keep-all">(1分)</div></div><div style="display:flex;width:100px;justify-content:space-between"><div><input type="radio" id="TRUE" name="1604661504341954586" value="TRUE" disabled="" checked=""/><label style="margin-left:4px" for="TRUE">T</label></div><div><input type="radio" id="FALSE" name="1604661504341954586" value="FALSE" disabled=""/><label style="margin-left:4px" for="FALSE">F</label></div></div></div></div></div><hr/><div style="display:flex;font-size:16px;margin-top:16px"><span style="flex-grow:1;font-weight:bold">单选题</span><span>得分：暂无</span><span style="margin-left:20px">总分：24</span></div><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-1</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><pre><code>主成分分析中，
+</code></pre>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954587" value="A" disabled="" checked=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>有必要考虑变量的量纲，避免出现“大数吃小数”</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954587" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>需要考虑样品间的相关性</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954587" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>得到的各个主成分实际上是影响各原始变量的潜在因素</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954587" value="D" disabled=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>有多少个原始变量，就需要选取多少个主成分</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-2</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><pre><code>关于第一个主成分，下列描述正确的是
+</code></pre>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954588" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>与原始变量的相关性最大</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954588" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>其系数的绝对值显著地比其他主成分系数的绝对值大</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954588" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>与第二个主成分之间的相关性最大</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954588" value="D" disabled="" checked=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>其累积方差贡献率最大</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-3</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><pre><code>关于第一个主成分，下列描述正确的是
+</code></pre>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954589" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>与原始变量的相关性最大</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954589" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>其系数的绝对值显著地比其他主成分系数的绝对值大</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954589" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>与第二个主成分之间的相关性最大</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954589" value="D" disabled="" checked=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>其累积方差贡献率最大</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-4</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><pre><code>主成分分析中各主成分之间是
+</code></pre>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954590" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>相互独立</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954590" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>彼此相关</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954590" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>存在线性相关</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954590" value="D" disabled="" checked=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>互不相关</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-5</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><pre><code>在利用主成分分析进行综合评价时，要对样本观测进行一些变换，最常用的是
+</code></pre>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954591" value="A" disabled="" checked=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>同向化变换</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954591" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>标准化变换</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954591" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>对数变换</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954591" value="D" disabled=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>极差规格化变换</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-6</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><pre><code>为了更充分有效地代表原始变量的信息，不同的主成分应携带不同的信息。以第一、第二主成分Y1\Y2为例，
+</code></pre>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954592" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>cov(Y1,Y2)≠0</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954592" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>Y1和Y2高度相关</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954592" value="C" disabled="" checked=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>cov(Y1,Y2)=0</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954592" value="D" disabled=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>cov(Y1,Y2)=1</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-7</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><pre><code>主成分分析的主要任务有
+</code></pre>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954593" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>计算因子个数</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954593" value="B" disabled="" checked=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>确定主成分个数</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954593" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>计算平均值</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954593" value="D" disabled=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>预测变量分类</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-8</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><pre><code>利用主成分分析得到的各个主成分之间为下面哪个选项？   
+</code></pre>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954594" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>0</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954594" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>1</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954594" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>一定数值</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954594" value="D" disabled="" checked=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>最小</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-9</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子分析中对于因子载荷的求解最不常用的方法是。   </p>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954595" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>主成分法</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954595" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>主轴因子法</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954595" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>极大似然法</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954595" value="D" disabled="" checked=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>极小似然法</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-10</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>第k个主成分yk的系数向量是下面哪个？   </p>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954596" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>第k个特征根</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954596" value="B" disabled="" checked=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>第k个特征根所对应的特征向量</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954596" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>第k个特征根所对应的方差贡献率</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954596" value="D" disabled=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>第k个特征根所对应的累计方差贡献率</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-11</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>利用主成分分析得到的各个主成分之间为下面哪个？   </p>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954597" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>互不独立</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954597" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>线性相关</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954597" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>不完全相关</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954597" value="D" disabled="" checked=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>互不相关</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">2-12</div><div style="overflow:auto;flex-grow:1"><div style="display:flex"><div style="flex-grow:1"><div class="rendered-markdown"><p>因子分析把变量分成下列两部分因素。   </p>
+</div></div><div style="color:gray;word-break:keep-all">(2分)</div></div><div style="flex-wrap:wrap;display:flex"><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="A" name="1604661504341954598" value="A" disabled=""/><label style="margin-left:4px" for="A"><div style="display:flex"><div>A.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>相关因子和不相关因子</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="B" name="1604661504341954598" value="B" disabled=""/><label style="margin-left:4px" for="B"><div style="display:flex"><div>B.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>向量因子和非向量因子</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="C" name="1604661504341954598" value="C" disabled=""/><label style="margin-left:4px" for="C"><div style="display:flex"><div>C.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>公共因子和独立因子</p>
+</div></div></div></label></div><div style="flex-basis:97.5%;flex-grow:1"><input type="radio" id="D" name="1604661504341954598" value="D" disabled="" checked=""/><label style="margin-left:4px" for="D"><div style="display:flex"><div>D.</div><div style="margin-left:4px"><div class="rendered-markdown"><p>公共因子和特殊因子</p>
+</div></div></div></label></div></div></div></div></div><hr/><div style="display:flex;font-size:16px;margin-top:16px"><span style="flex-grow:1;font-weight:bold">填空题</span><span>得分：暂无</span><span style="margin-left:20px">总分：42</span></div><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-1</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>因子分析中，将每个原始变量分解为两个部分，一个部分由所有变量共同具有的少数几个<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="公共因子" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>组成的，另一个部分是每个变量独自具有的因素，即<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="特殊因子" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-2</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>设X=(x_1,x_2,x_3)为标准化后的随机变量，将其协方差矩阵通过因子分析分解为：</p>
+<p><img src="https://images.ptausercontent.com/14569578-1394-4bca-b6fb-d2c08ec8fbbc.png" alt="QQ截图20201227001902.png"></p>
+<p>x_1的共同度<br><img src="https://images.ptausercontent.com/5edbc763-b21c-4a9f-86d4-e5e75ed4b60b.png" alt="QQ截图20201227002037.png"><br>=<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="0.872" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>，x_1的剩余方差<br><img src="https://images.ptausercontent.com/868e4381-cd16-458a-ab48-58f99d93de85.png" alt="QQ截图20201227002114.png"><br>=<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="0.128" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>，公因子F_1与x_1的协方差=<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="0.934" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>。（结果保留小数点后三位）</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-3</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>对多元数据X（x1,x2,x3,x4,x5）进行了主成分分析, 样本的特征值λ_1=2.857，λ_2=0.809，λ_3=0.609，λ_4=0.521，λ_5=0.203对应特征向量p1=(0.464,0.457,0.470,0.421,0.421), p1= (0.240,0.509,0.260,-0.526,-0.582),则第一主成分Y1的计算公式是<span data-reactroot=""><input type="text" style="max-width:none;width:50.4ch;max-height:500px" value="Y1=0.464x1+0.457x2+0.470x3+0.421x4+0.421x5" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-4</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>进行K-均值聚类时，碎石图如图所示，则最优的分类数为<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="2|3" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>。</p>
+<p><img src="https://images.ptausercontent.com/25fd927d-9e66-423c-a6ac-cba391bbfd1e.png" alt="2.png"></p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-5</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p><span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="主成分分析" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>是利用降维的思想，在损失很少信息的前提下把多个指标转化为几个综合指标的多元统计方法。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-6</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>主成分分析通常把转化生成的综合指标称之为主成分，其中每个主成分都是原始变量的<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="线性组合" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>，且各个主成分之间互不相关，这就使得主成分比原始变量具有某些更优越的性能。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-7</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>主成分分析中我们所说的保留原始变量尽可能多的信息，也就是指的生成的较少的综合变量的方差和尽可能接近于原始变量<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="方差" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>的总和。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-8</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>主成分分析中可以利用<span data-reactroot=""><input type="text" style="max-width:none;width:22.8ch;max-height:500px" value="协方差矩阵|相关矩阵" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>求解主成分。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-9</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>对多元数据X（x1,x2,x3,x4）进行了主成分分析, 样本的特征值λ_1=2.857，λ_2=0.809，λ_3=0.702，λ_4=0.025，则第一主成分的方差贡献率是<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="65" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>%(保留百分数的整数位)。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-10</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>在进行主成分分析得出协方差阵或是相关阵发现最小特征根接近于零时，意味着中心化以后的原始变量之间存在<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="多重共线性" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>，即原始变量存在着不可忽视的重叠信息。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-11</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>主成分的协方差矩阵为<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="对角矩阵|对角阵" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span> 。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-12</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>因子分析中因子载荷系数aij的统计意义是第i个变量与第j个公因子的<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="相关系数" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span> 。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-13</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>多元分析中常用的统计量有<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="样本均值向量" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span><span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="样本协差阵" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span><span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="样本离差阵" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span><span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="样本相关系数矩阵" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>。</p>
+<p>每题可以有多个空。<span data-reactroot=""><input type="text" style="max-width:none;width:24ch;max-height:500px" value="答案一|答案二|答案三" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span>。题目创建后不可修改填空数量。</p>
+</div></div></div></div></div><hr/><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">4-14</div><div style="overflow:auto;flex-grow:1"><div><div class="rendered-markdown"><p>主成分分析是利用<span data-reactroot=""><input type="text" style="max-width:none;width:19.2ch;max-height:500px" value="降维" disabled=""/><span style="margin-left:4px;color:gray">(2分)</span></span> 的思想，在损失很少的信息前提下，把多个指标转化为几个综合指标的多元统计方法。</p>
+</div></div></div></div></div><hr/><div style="display:flex;font-size:16px;margin-top:16px"><span style="flex-grow:1;font-weight:bold">编程题</span><span>得分：暂无</span><span style="margin-left:20px">总分：7</span></div><div style="padding-bottom:8px;margin-top:12px"><div style="display:flex"><div style="margin-right:12px;white-space:nowrap">7-1</div><div style="overflow:auto;flex-grow:1"><div style="margin-bottom:8px;display:flex"><div style="font-weight:bold">写出贡献率最大的主成分线性方程</div><div style="margin-left:8px;color:gray">(7分)</div></div><div><div class="rendered-markdown"><p>有一组数据<br><img src="https://images.ptausercontent.com/3b2fc649-83ce-44cf-81d2-df27e86720e0.jpg" alt="1825085-6d6ecc70314109e8.jpg">，现在要用主成分做降维处理，且原始数据在降维前需采用均值标准化后才参与计算，最后给出特征值最大的第一主成分的变换公式。</p>
+<h3 id="输入格式">输入格式:</h3>
+<p>请在这里写输入格式。例如：输入在一行中给出2个绝对值不超过1000的整数A和B。</p>
+<h3 id="输出格式">输出格式:</h3>
+<p>请在这里描述输出格式。例如：对每一组输入，在一行中输出A+B的值。</p>
+<h3 id="输入样例">输入样例:</h3>
+<p>在这里给出一组输入。例如：</p>
+<pre><code class="language-in">2.5,2.4,0.5,0.7,2.2,2.9,1.9,2.2,3.1,3.0,2.3,2.7,2,1.6,1,1.1,1.5,1.6,1.1,0.9 
+10,2
+</code></pre>
+<h3 id="输出样例">输出样例:</h3>
+<p>在这里给出相应的输出。例如：</p>
+<pre><code class="language-out">第1主成分=-0.67787*(x1-1.81)-0.73518*(x2-1.91)
+</code></pre>
+</div></div></div></div></div><hr/></div></div>
+
+</body>
+</html>
