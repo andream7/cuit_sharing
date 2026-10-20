@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>订单信息</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<meta name="keywords" content="" />
+<link href="../static/css/style.css" rel='stylesheet' type='text/css' />
+<!--webfonts-->
+<link href='fonts.useso.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+<link href='fonts.useso.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+<!--//webfonts-->
+<script ></script>
+</head>
+
+{% block content %}
+<body>
+<script>$(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});
+});
+</script>
+ <h1>所有订单</h1>
+<div class="show-form">
+	<div class="close"> </div>
+		<div class="head-info">
+			<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>
+		</div>
+
+        {% if order_ids %}
+            {% for order_id in order_ids %}
+                <h5 align="center">订单号: {{ order_id }}&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;用户编号: {{ user_id.pop(0) }}</h5>
+                <table width="600" border="1" align="center">
+                    <tr>
+                        <th align="center">商品编号</th>
+                        <th align="center">商品名</th>
+                        <th align="center">商品价格</th>
+                        <th align="center">购买数量</th>
+                    </tr>
+
+                    {% for record in orders%}
+                        {% if record.order_id == order_id  %}
+                         <tr>
+
+                            <th>{{ record.good_id }}</th>
+                            <th>{{ record.good_name }}</th>
+                            <th>{{ record.price }}</th>
+                            <th>{{ record.number }}</th>
+                         </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+                    <h5 display="inline" align="center">合计: {{ sum_list.pop() }}</h5>
+                <br><br>
+            {% endfor %}
+        {% endif %}
+</div>
+
+{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+  {% endwith %}
+    </div>
+</body>
+{% endblock %}
+
+</html>

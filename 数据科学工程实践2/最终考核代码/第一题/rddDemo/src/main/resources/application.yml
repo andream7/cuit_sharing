@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spark:
+  application:
+    name: SparkApplication
+  master: local[*]
+
+logging:
+  level:
+    root: WARN
+
+

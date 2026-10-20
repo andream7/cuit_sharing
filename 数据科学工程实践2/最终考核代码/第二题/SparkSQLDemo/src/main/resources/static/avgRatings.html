@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ratings by Gender and Genre</title>
+    <!-- 引入 ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<div id="chart" style="width: 100%; height: 600px;"></div>
+
+<script>
+    var myChart = echarts.init(document.getElementById('chart'));
+
+    fetch('/api/movies/ratings')
+        .then(response => response.json())
+        .then(data => {
+            let maleRatings = {};
+            let femaleRatings = {};
+            data.forEach(item => {
+                if (item.gender === "M") {
+                    maleRatings[item.genre] = item.averageRating;
+                } else if (item.gender === "F") {
+                    femaleRatings[item.genre] = item.averageRating;
+                }
+            });
+
+            let genres = Array.from(new Set(data.map(item => item.genre)));
+            let maleRatingsData = genres.map(genre => maleRatings[genre] || 0);
+            let femaleRatingsData = genres.map(genre => femaleRatings[genre] || 0);
+
+            const option = {
+                title: {
+                    text: 'Movie Ratings by Gender and Genre',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['Male', 'Female'],
+                    top: 'bottom'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: genres,
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} Stars'
+                    }
+                },
+                series: [
+                    {
+                        name: 'Male',
+                        type: 'bar',
+                        barGap: 0,
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: maleRatingsData,
+                        itemStyle: {
+                            color: '#1f77b4'
+                        }
+                    },
+                    {
+                        name: 'Female',
+                        type: 'bar',
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: femaleRatingsData,
+                        itemStyle: {
+                            color: '#e377c2'
+                        }
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+</body>
+</html>

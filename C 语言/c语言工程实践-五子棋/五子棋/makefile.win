@@ -1,0 +1,37 @@
+# Project: 五子棋
+# Makefile created by Red Panda C++ 2.1
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = 五子棋_private.res
+OBJ      = game.o main.o $(RES)
+LINKOBJ  = game.o main.o $(RES)
+CLEANOBJ  =  game.o main.o 五子棋_private.res 五子棋.exe
+LIBS     =  -static
+INCS     =  
+CXXINCS  =  
+BIN      = 五子棋.exe
+CXXFLAGS = $(CXXINCS)  -g3 -O2 -pipe -D__DEBUG__
+CFLAGS   = $(INCS)  -g3 -O2 -pipe -D__DEBUG__
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+game.o: game.c main.h
+	$(CC) -c C:/Users/admin/Documents/projects/五子棋/game.c -o game.o $(CFLAGS) 
+
+main.o: main.c main.h
+	$(CC) -c C:/Users/admin/Documents/projects/五子棋/main.c -o main.o $(CFLAGS) 
+
+五子棋_private.res: 五子棋_private.rc 
+	$(WINDRES) -i 五子棋_private.rc --input-format=rc -o 五子棋_private.res -O coff 
+

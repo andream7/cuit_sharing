@@ -1,0 +1,172 @@
+:root {
+    --bg-color: #e9e5e1;
+    --primary-color: rgba(50,157,255,.8);
+    --white: #fff;
+    --black: #000;
+    --gray: #333;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    background-color: var(--bg-color);
+    height: 100%;
+    overflow: auto;
+  }
+  
+  #parameter-init {
+    font-size: 14px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray);
+  }
+  #parameter-init.inactive {
+    display: none;
+  }
+  #parameter-init .game-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  #parameter-init .checker-size,
+  #parameter-init .game-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #parameter-init .checker-size .selection,
+  #parameter-init .game-mode .selection {
+    width: 90px;
+    height: 28px;
+    text-align: center;
+  }
+  #parameter-init .game-mode {
+    margin-top: 24px;
+  }
+  #parameter-init #confirm-begin {
+    margin-top: 24px;
+    width: 160px;
+    height: 36px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    color: var(--primary-color);
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #parameter-init #confirm-begin:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+  
+  #person2person {
+    display: none;
+    padding: 24px;
+  }
+  #person2person.active {
+    display: block;
+  }
+  .hint {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .hint #result-msg.white {
+    color: var(--white);
+  }
+  .hint #result-msg.black {
+    color: var(--black);
+  }
+  #current-role {
+    width: 26px;
+    height: 26px;
+  }
+  #current-role.chessman {
+    border-radius: 50%;
+  }
+  #current-role.chessman.win-white {
+    background-image: radial-gradient(#f9f9f9, #d1d1d1);
+  }
+  #current-role.chessman.win-black {
+    background-image: radial-gradient(#636766, #0a0a0a);
+  }
+  #current-role.chessman.white,
+  #current-role.chessman.black {
+    position: relative;
+  }
+  #current-role.chessman.white::before,
+  #current-role.chessman.white::after,
+  #current-role.chessman.black::before,
+  #current-role.chessman.black::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation-name: circleWave;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  #current-role.chessman.white::before,
+  #current-role.chessman.black::before {
+    animation-delay: 0;
+  }
+  #current-role.chessman.white::after,
+  #current-role.chessman.black::after {
+    animation-delay: 1s;
+  }
+  #current-role.chessman.white {
+    background: var(--white);
+  }
+  #current-role.chessman.white::before,
+  #current-role.chessman.white::after {
+    background: var(--white);
+  }
+  #current-role.chessman.black {
+    background: var(--black);
+  }
+  #current-role.chessman.black::before,
+  #current-role.chessman.black::after {
+    background: var(--black);
+  }
+  #checkerboard {
+    display: block;
+    margin: 0 auto;
+    box-shadow: -2px -2px 2px #efefef, 5px 5px 5px #b9b9b9;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+  /* CSS中的关键帧动画（keyframes animation） */
+  @keyframes circleWave {
+    0% {
+      transform: scale(1);
+      opacity: 0;
+    }
+    25% {
+      transform: scale(1.2);
+      opacity: 0.75;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+    75% {
+      transform: scale(1.8);
+      opacity: 0.25;
+    }
+    100% {
+      transform: scale(2.0);
+      opacity: 0;
+    }
+  }
