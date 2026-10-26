@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.orc:orc-mapreduce:1.6.12">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/apache/orc/orc-mapreduce/1.6.12/orc-mapreduce-1.6.12.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/apache/orc/orc-mapreduce/1.6.12/orc-mapreduce-1.6.12-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/apache/orc/orc-mapreduce/1.6.12/orc-mapreduce-1.6.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

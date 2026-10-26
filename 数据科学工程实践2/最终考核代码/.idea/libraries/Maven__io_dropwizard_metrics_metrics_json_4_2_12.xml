@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.dropwizard.metrics:metrics-json:4.2.12">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/io/dropwizard/metrics/metrics-json/4.2.12/metrics-json-4.2.12.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/io/dropwizard/metrics/metrics-json/4.2.12/metrics-json-4.2.12-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/io/dropwizard/metrics/metrics-json/4.2.12/metrics-json-4.2.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework:spring-websocket:5.3.23">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/springframework/spring-websocket/5.3.23/spring-websocket-5.3.23.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/springframework/spring-websocket/5.3.23/spring-websocket-5.3.23-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/springframework/spring-websocket/5.3.23/spring-websocket-5.3.23-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

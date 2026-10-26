@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #filterKeyword {
+            width: 300px;
+            height: 25px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        #results {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Movie Filter</h1>
+<input type="text" id="filterKeyword" placeholder="Enter keyword">
+<button onclick="sendKeyword()">Filter</button>
+
+<div id="results"></div>
+
+<script>
+    function sendKeyword() {
+        var keyword = document.getElementById('filterKeyword').value;
+        fetch(`/api/movies/filter?keyword=${keyword}`)
+            .then(response => response.json())
+            .then(data => {
+                var html = "<table><tr><th>Movie ID</th><th>Title</th><th>Genres</th></tr>";
+                data.forEach(movie => {
+                    html += `<tr><td>${movie.movieId}</td><td>${movie.title}</td><td>${movie.genres.split('|').join(', ')}</td></tr>`;
+                });
+                html += "</table>";
+                document.getElementById('results').innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('results').innerHTML = "不能加载数据";
+            });
+    }
+
+
+</script>
+</body>
+</html>

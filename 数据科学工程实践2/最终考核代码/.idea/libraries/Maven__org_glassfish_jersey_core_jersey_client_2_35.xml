@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.glassfish.jersey.core:jersey-client:2.35">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/glassfish/jersey/core/jersey-client/2.35/jersey-client-2.35.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/glassfish/jersey/core/jersey-client/2.35/jersey-client-2.35-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../maven/apache-maven-3.9.6/rep/org/glassfish/jersey/core/jersey-client/2.35/jersey-client-2.35-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

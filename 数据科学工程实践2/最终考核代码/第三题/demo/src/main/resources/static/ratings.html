@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时评分</title>
+<!--    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>-->
+    <script src="js/echarts.js"></script>
+    <style>
+        #ratingsChart {
+            width: 80%;
+            height: 400px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+<div id="ratingsChart"></div>
+
+<script>
+    // 初始化 ECharts 实例
+    var myChart = echarts.init(document.getElementById('ratingsChart'));
+
+    // ECharts 的选项
+    var option = {
+        title: {
+            text: '实时评分'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['实时评分']
+        },
+        xAxis: {
+            type: 'category',
+            data: []
+        },
+        yAxis: {
+            type: 'value',
+            min: 0,
+            max: 5
+        },
+        series: [{
+            name: '实时评分',
+            type: 'line',
+            data: []
+        }]
+    };
+
+    // 将选项设置到图表中
+    myChart.setOption(option);
+
+    function safeParseJSON(response) {
+        if (!response.ok) throw new Error('Network response was not ok.');
+        return response.text().then(text => {
+            return text ? JSON.parse(text) : null;
+        });
+    }
+
+
+    setInterval(function() {
+        fetch('http://localhost:8081/getData')
+            .then(response => response.json())
+            .then(ratings => {
+                if (!ratings || ratings.length === 0) {
+                    console.error('No ratings returned from server');
+                    return;
+                }
+
+                console.log("Received Ratings:", ratings);
+
+                // 使用新数据更新 ECharts 图表
+                ratings.forEach(rating => {
+                    option.xAxis.data.push(new Date().toLocaleTimeString());
+                    option.series[0].data.push(rating);
+                });
+
+                // 仅保留最新的 20 个数据点
+                while (option.xAxis.data.length > 50) {
+                    option.xAxis.data.shift();
+                    option.series[0].data.shift();
+                }
+
+                myChart.setOption(option);
+            })
+            .catch(error => console.error('Error:', error));
+    }, 5000);
+</script>
+</body>
+</html>

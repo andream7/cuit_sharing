@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/one?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 204526771x
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#这是 JDBC 连接数据库时使用的 URL，其中包含以下信息：
+#
+#jdbc:mysql:// 表示连接 MySQL 数据库的协议和子协议。
+#
+#localhost:3306/ 表示连接的 MySQL 服务器地址和端口号。这里的示例是连接到本地 MySQL 数据库，端口号为 3306。
+#
+#test 表示要连接的数据库名称。
+#
+#useSSL=false 表示是否使用 SSL 安全连接。这里设置为 false，表示不使用 SSL 安全连接。
+
+server:
+  port: 8083
+
+spark:
+  application:
+    name: SparkApplication
+  master: local[*]
+
+logging:
+  level:
+    root: WARN
+#这是一个 YAML 格式的配置文件，其中包含了 Spring Boot 应用程序、Spark框架和日志系统的配置信息。
+#
+#具体来说：
+#
+#spring.datasource 是 Spring Boot 应用程序中用于配置数据库连接池的配置项，包括数据库的URL、用户名、密码和驱动类名等信息。
+#
+#server.port 是 Spring Boot 应用程序运行时的端口号。
+#
+#spark.application.name 和 spark.master 是 Spark 应用程序的配置项，分别表示应用程序的名称和运行模式。
+#
+#logging.level.root 是日志系统的配置项，表示输出日志的级别。在这个例子中，日志级别为 WARN，即只输出警告级别及以上的日志信息。
+#
+#需要注意的是，YAML 文件中使用缩进（空格）来表示层次结构，因此要确保每个缩进都使用相同数量的空格。同时，还需要遵循 YAML 的语法规则，例如冒号后面必须要有空格等。

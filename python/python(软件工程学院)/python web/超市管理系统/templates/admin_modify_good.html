@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>商品信息</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<meta name="keywords" content="" />
+<link href="../static/css/style.css" rel='stylesheet' type='text/css' />
+<!--webfonts-->
+<link href='fonts.useso.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+<link href='fonts.useso.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+<!--//webfonts-->
+<script ></script>
+</head>
+
+{% block content %}
+<body>
+<script>$(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});
+});
+</script>
+ <!--SIGN UP-->
+ <h1>商品信息</h1>
+<div class="login-form">
+	<div class="close"> </div>
+		<div class="head-info">
+			<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>
+		</div>
+			<div class="clear"> </div>
+
+            {% if error %}
+            <div class = error>
+              <strong>Error : </strong> {{error}}
+            </div>
+            {% endif%}
+
+			 <form action="" method=post>
+                 {% if good %}
+                    <input type="text" class="test" name=bar_code size=30 value={{good.bar_code}}  onfocus="if (value =={{good.bar_code}})value=''" onblur="if (value =='')value={{good.bar_code}}">
+                     <br><br>
+                    <input type=text class="test" name=good_name size=30 value={{good.good_name}} onfocus="if (value =={{good.good_name}})value=''" onblur="if (value =='')value={{good.good_name}}">
+                     <br><br>
+                     <input type=text class="test" name=price size=30 value={{good.price}}  onfocus="if (value =={{good.price}})value=''" onblur="if (value =='')value={{good.price}}">
+                     <br><br>
+                     <input type="text" class="test" name="type" size="30" value={{good.type}}  onfocus="if (value =={{good.type}})value=''" onblur="if (value =='')value={{good.type}}">
+                     <br><br>
+                     <input type="text" class="test" name="description" size="30" value={{good.description}}  onfocus="if (value =={{good.description}})value=''" onblur="if (value =='')value={{good.description}}">
+                     <br><br>
+                 {% endif %}
+
+                <div class=actions>
+                <input type="submit" value="修改" >
+                </div>
+             </form>
+
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+</div>
+</body>
+{% endblock %}
+</html>

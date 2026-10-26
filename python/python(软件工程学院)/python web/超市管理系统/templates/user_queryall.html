@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>所有商品</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<meta name="keywords" content="" />
+<link href="../static/css/style.css" rel='stylesheet' type='text/css' />
+<!--webfonts-->
+<link href='fonts.useso.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+<link href='fonts.useso.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+<!--//webfonts-->
+<script ></script>
+</head>
+
+{% block content %}
+<body>
+<script>$(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});
+});
+</script>
+ <h1>所有商品</h1>
+<div class="show-form">
+	<div class="close"> </div>
+		<div class="head-info">
+			<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>
+		</div>
+
+
+            {% if error %}
+        <div class=error>
+          <strong>Error :  {{error}}</strong>
+        </div>
+    {% endif %}
+
+    <form action="" method="post">
+        <table width="600" border="1" align="center">
+            <h4 align="center">所有商品</h4>
+            <tr>
+                <th align="center">商品编号</th>
+                <th align="center">商品名</th>
+                <th align="center">商品价格</th>
+                <th align="center">商品类型</th>
+                <th align="center">商品描述</th>
+                <th align="center">选定</th>
+            </tr>
+            {% for good in goods %}
+            <tr>
+                <th>{{good[0]}}</th>
+                <th>{{good[1]}}</th>
+                <th>{{good[2]}}</th>
+                <th>{{good[3]}}</th>
+                <th>{{good[4]}}</th>
+                <th align="center"><input type="checkbox" name="checkbox" value={{ good[0] }}></th>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div><h4> </h4></div>
+        <div class=actions align = "center">
+	    <input type=submit value="确认">
+	    </div>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    </div>
+
+{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+  {% endwith %}
+    </div>
+</body>
+{% endblock %}
+
+</html>
